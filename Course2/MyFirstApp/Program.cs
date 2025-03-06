@@ -17,15 +17,46 @@
 // Console.WriteLine(firstUserAccess);
 // Console.WriteLine(secondUserAccess);
 
-var user = Tuple.Create("Aliev", "Ali", 15);
-var user2 = Tuple.Create("Aliev", "Ali", 15);
-var user5 = ("Jake", 45);
+// var user = Tuple.Create("Aliev", "Ali", 15);
+// var user2 = Tuple.Create("Aliev", "Ali", 15);
+// var user5 = ("Jake", 45);
+//
+// Console.WriteLine($"User name is {user.Item2} last name is {user.Item1}, age is {user.Item3}");
+//
+// var userInfo = GetUserInformation(user);
+// var (name, age) = GetUserInformation(user);
+// Console.WriteLine($"User name is {name}, age is {age}");
 
-Console.WriteLine($"User name is {user.Item2} last name is {user.Item1}, age is {user.Item3}");
+using MyFirstApp.Models;
 
-var userInfo = GetUserInformation(user);
-var (name, age) = GetUserInformation(user);
-Console.WriteLine($"User name is {name}, age is {age}");
+var ali = new User(1)
+{
+    FirstName = "Alex",
+    LastName = "Kowalski",
+    Email = "alexkowalski@gmail.com",
+};
+ali.DoWork();
+var id = ali.Id;
+ali.Age = 45;
+
+var userDTO = new UserDTO();
+userDTO.Id = userDTO.Id;
+userDTO.FirstName = ali.FirstName;
+userDTO.Email = ali.Email;
+
+
+userDTO.Email = "sdsdfsd";
+
+
+
+var vali = new User(2, "Vali@itrun.com")
+{
+    FirstName = "Vali",
+    LastName = "Kowalski",
+    Email = "alexkowalski@gmail.com",
+};
+Console.WriteLine($"User name is {ali.FirstName} last name is {ali.LastName}, age is {ali.Age}");
+
 
 Console.WriteLine("Finished");
 return;
