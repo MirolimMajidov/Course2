@@ -26,8 +26,16 @@ public class User
 
     public required string LastName { get; set; }
     public string Email { get; set; }
+    
     public string Password { get; set; }
     public int Age { get; set; }
+
+    public static int Counter { get; set; }
+
+    public User()
+    {
+        Counter++;
+    }
 
     public User(int id)
     {
@@ -50,3 +58,16 @@ public class User
 }
 
 public class TestClass(int Id, string FirstName, string LastName, string Email, string Password);
+
+
+public class SmsSender
+{
+    public static void Send(string message)
+    {
+        
+    }
+    public void Send2(string message)
+    {
+        
+    }
+}

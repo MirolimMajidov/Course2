@@ -28,6 +28,14 @@
 // Console.WriteLine($"User name is {name}, age is {age}");
 
 using MyFirstApp.Models;
+using MyFirstApp.Models.Credit;
+using MyFirstApp.Models.Deposit;
+
+//User.Printer("Test method");
+
+
+var age = 10;
+age.Sum(5);
 
 var ali = new User(1)
 {
@@ -36,6 +44,8 @@ var ali = new User(1)
     Email = "alexkowalski@gmail.com",
 };
 ali.DoWork();
+ali.Printer("Test");
+
 var id = ali.Id;
 ali.Age = 45;
 
@@ -45,9 +55,10 @@ userDTO.FirstName = ali.FirstName;
 userDTO.Email = ali.Email;
 
 
+var credit = new TemporaryCredit();
+
+
 userDTO.Email = "sdsdfsd";
-
-
 
 var vali = new User(2, "Vali@itrun.com")
 {
