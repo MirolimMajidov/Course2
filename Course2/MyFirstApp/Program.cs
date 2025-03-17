@@ -10,18 +10,31 @@
 // notifier = MyNotifier.SmsSender;
 // notifier("Test4");
 
-Notifier2 notifier2 = TestMethod;
-var result = notifier2("Hi");
+// Notifier2 notifier2 = TestMethod;
+// var result = notifier2("Hi");
+//
+// Func<string, string> notifier3 = TestMethod;
+// var result2 = notifier3("Hi");
+//
+// Notifier2 notifier4 = delegate (string message)
+// {
+//     return $"Tester : {message}";
+// };
 
-Func<string, string> notifier3 = TestMethod;
-var result2 = notifier3("Hi");
+Func<string, int, string> notifier5 = (name, age) => $"User name is {name}, age is {age}";
+
+var result = notifier5("Ali", 25);
+Console.WriteLine(result);
+
+var result2 = notifier5("Vali", 5);
+Console.WriteLine(result2);
+
 
 //using MyFirstApp.Models;
 // var user = new User(TestMethod)
 // {
 //     LastName = ""
 // };
-
 
 // var user2 = new User(MyNotifier.SmsSender)
 // {
