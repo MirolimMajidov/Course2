@@ -39,6 +39,24 @@ internal class User
         Email = "User";
         Counter++;
     }
+    
+    public User(Notifier notifier)
+    {
+        Email = "User";
+        Counter++;
+
+        // switch (type)
+        // {
+        //     case "sms":
+        //         MyNotifier.SmsSender("sd");
+        //         break;
+        //     case "telegram":
+        //         MyNotifier.TelegramNotifier("sd");
+        //     break;
+        // }
+
+        notifier("User created.");
+    }
 
     public User(int id)
     {
