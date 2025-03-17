@@ -2,7 +2,7 @@ namespace MyFirstApp.Models;
 
 public static class Extensions
 {
-    public static void Printer(this User user, string text)
+    internal static void Printer(this User user, string text)
     {
         SmsSender.Send(text);
         

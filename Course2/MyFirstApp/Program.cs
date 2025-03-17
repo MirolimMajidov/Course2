@@ -27,15 +27,72 @@
 // var (name, age) = GetUserInformation(user);
 // Console.WriteLine($"User name is {name}, age is {age}");
 
+using System.Text;
 using MyFirstApp.Models;
 using MyFirstApp.Models.Credit;
 using MyFirstApp.Models.Deposit;
 
 //User.Printer("Test method");
 
+int age = 10;
+var day = 10;
 
-var age = 10;
+int? age2 = null;
+if (day == 15)
+{
+    age2 = 45;
+}
+
+var ageAsString = age2.GetHashCode();
+if (age2 != null)
+{
+    var ageAsString2 = age2.ToString();
+}
+if (age2 is not null)
+{
+    var ageAsString2 = age2.ToString();
+}
+if (age2.HasValue)
+{
+    var ageAsString2 = age2.ToString();
+}
+
 age.Sum(5);
+
+string name2 = null;
+var name = "";
+string name3 = "";
+string name4 = string.Empty;
+string name5 = string.Empty;
+
+string[] names = ["Ali", "Vali", "Jake", "Jake2"];
+var allNames = string.Empty;
+foreach (var _name in names)
+{
+    allNames += _name;
+}
+//O1 = 0
+//O2 = 5
+//O3 = 10
+//O4 = 15
+//O5 = 20
+var nameBuilder = new StringBuilder();
+foreach (var _name in names)
+{
+    nameBuilder.Append(_name);
+}
+var allNames2 = nameBuilder.ToString(); //20
+
+
+
+User user1 = null;
+user1 = new User(1)
+{
+    FirstName = "Ali",
+    LastName = "Kowalski",
+    Email = ""
+};
+
 
 var ali = new User(1)
 {
@@ -44,10 +101,14 @@ var ali = new User(1)
     Email = "alexkowalski@gmail.com",
 };
 ali.DoWork();
+
+Extensions.Printer(ali, "dssd");
 ali.Printer("Test");
 
 var id = ali.Id;
 ali.Age = 45;
+
+ali.Age.Sum(5);
 
 var userDTO = new UserDTO();
 userDTO.Id = userDTO.Id;

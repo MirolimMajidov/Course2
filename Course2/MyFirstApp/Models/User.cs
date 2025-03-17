@@ -1,6 +1,6 @@
 namespace MyFirstApp.Models;
 
-public class User
+internal class User
 {
     public int Id { get; }
 
@@ -24,16 +24,19 @@ public class User
         }
     }
 
-    public required string LastName { get; set; }
+    public required string LastName { get;  set; }
     public string Email { get; set; }
     
     public string Password { get; set; }
     public int Age { get; set; }
+    
+    public int? Level { get; set; }
 
     public static int Counter { get; set; }
 
     public User()
     {
+        Email = "User";
         Counter++;
     }
 
