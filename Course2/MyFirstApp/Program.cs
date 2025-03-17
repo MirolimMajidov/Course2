@@ -1,5 +1,5 @@
-﻿//Notifier notifier = null;
-
+﻿// Action<string> notifier = null;
+//
 // notifier = MyNotifier.TelegramNotifier;
 // notifier("Test1");
 // notifier("Test2");
@@ -10,24 +10,35 @@
 // notifier = MyNotifier.SmsSender;
 // notifier("Test4");
 
-using MyFirstApp.Models;
+Notifier2 notifier2 = TestMethod;
+var result = notifier2("Hi");
 
-var user = new User(MyNotifier.TelegramNotifier)
-{
-    LastName = ""
-};
+Func<string, string> notifier3 = TestMethod;
+var result2 = notifier3("Hi");
+
+//using MyFirstApp.Models;
+// var user = new User(TestMethod)
+// {
+//     LastName = ""
+// };
 
 
-var user2 = new User(MyNotifier.SmsSender)
-{
-    LastName = ""
-};
+// var user2 = new User(MyNotifier.SmsSender)
+// {
+//     LastName = ""
+// };
 
 
 Console.WriteLine("End...");
 
 
+string TestMethod(string message)
+{
+    return $"Tester : {message}";
+}
+
 delegate void Notifier(string message);
+delegate string Notifier2(string message);
 
 public static class MyNotifier
 {
