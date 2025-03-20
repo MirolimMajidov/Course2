@@ -24,6 +24,8 @@ internal class User
             {
                 _firstName = "User";
             }
+
+            _firstName = value;
         }
     }
 
@@ -40,12 +42,12 @@ internal class User
     public User()
     {
         Email = "User";
-        FirstName = "Ali";
+        //FirstName = "Ali";
         Counter++;
 
         var eventArgs = new DoWorkEventArgs
         {
-            UserName = FirstName
+            UserName = Email
         };
         
         UserCreated?.Invoke(this, eventArgs);
