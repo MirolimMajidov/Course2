@@ -1,72 +1,43 @@
-﻿// Action<string> notifier = null;
-//
-// notifier = MyNotifier.TelegramNotifier;
-// notifier("Test1");
-// notifier("Test2");
-//
-// notifier = MyNotifier.EmailSender;
-// notifier("Test3");
-//
-// notifier = MyNotifier.SmsSender;
-// notifier("Test4");
+﻿
+using MyFirstApp.Models;
 
-// Notifier2 notifier2 = TestMethod;
-// var result = notifier2("Hi");
-//
-// Func<string, string> notifier3 = TestMethod;
-// var result2 = notifier3("Hi");
-//
-// Notifier2 notifier4 = delegate (string message)
-// {
-//     return $"Tester : {message}";
-// };
+User.UserCreated += UserCreatedHandler1;
+User.UserCreated += UserCreatedHandler2;
 
-Func<string, int, string> notifier5 = (name, age) => $"User name is {name}, age is {age}";
-
-var result = notifier5("Ali", 25);
-Console.WriteLine(result);
-
-var result2 = notifier5("Vali", 5);
-Console.WriteLine(result2);
-
-
-//using MyFirstApp.Models;
-// var user = new User(TestMethod)
-// {
-//     LastName = ""
-// };
-
-// var user2 = new User(MyNotifier.SmsSender)
-// {
-//     LastName = ""
-// };
-
-
-Console.WriteLine("End...");
-
-
-string TestMethod(string message)
+var user = new User
 {
-    return $"Tester : {message}";
+    FirstName = "Ali",
+    LastName = "Valievich",
+    OnStartingWork = UserWorking
+};
+user.DoWork();
+user.DoWork();
+user.OnStartingWork -= UserWorking;
+
+user.OnStartingWork += (sender, args) =>
+{
+    Console.WriteLine("User working");
+};
+user.DoWork();
+
+
+Console.WriteLine("End");
+
+void UserCreatedHandler1(object sender, EventArgs e)
+{
+    if(sender is User user)
+        Console.WriteLine($"User created1: {user.FirstName}");
+    
+    Console.WriteLine("User created1");
 }
 
-delegate void Notifier(string message);
-delegate string Notifier2(string message);
-
-public static class MyNotifier
+void UserCreatedHandler2(object sender, DoWorkEventArgs e)
 {
-    public static void TelegramNotifier(string message)
-    {
-        Console.WriteLine($"Telegram : {message}");
-    }
+    Console.WriteLine($"User created1: {e.UserName}");
+    Console.WriteLine("User created2");
+}
 
-    public static void EmailSender(string message)
-    {
-        Console.WriteLine($"Email : {message}");
-    }
-
-    public static void SmsSender(string message)
-    {
-        Console.WriteLine($"Sms : {message}");
-    }
+void UserWorking(object sender, EventArgs e)
+{
+    Console.WriteLine("User working");
 }

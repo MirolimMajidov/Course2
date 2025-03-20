@@ -2,6 +2,9 @@ namespace MyFirstApp.Models;
 
 internal class User
 {
+    public static EventHandler<DoWorkEventArgs> UserCreated;
+    public EventHandler OnStartingWork;
+    
     public int Id { get; }
 
     private string _firstName;
@@ -24,7 +27,7 @@ internal class User
         }
     }
 
-    public required string LastName { get;  set; }
+    public string LastName { get;  set; }
     public string Email { get; set; }
     
     public string Password { get; set; }
@@ -37,26 +40,34 @@ internal class User
     public User()
     {
         Email = "User";
+        FirstName = "Ali";
         Counter++;
+
+        var eventArgs = new DoWorkEventArgs
+        {
+            UserName = FirstName
+        };
+        
+        UserCreated?.Invoke(this, eventArgs);
     }
     
-    public User(Notifier notifier)
-    {
-        Email = "User";
-        Counter++;
-
-        // switch (type)
-        // {
-        //     case "sms":
-        //         MyNotifier.SmsSender("sd");
-        //         break;
-        //     case "telegram":
-        //         MyNotifier.TelegramNotifier("sd");
-        //     break;
-        // }
-
-        notifier("User created.");
-    }
+    // public User(Notifier notifier)
+    // {
+    //     Email = "User";
+    //     Counter++;
+    //
+    //     // switch (type)
+    //     // {
+    //     //     case "sms":
+    //     //         MyNotifier.SmsSender("sd");
+    //     //         break;
+    //     //     case "telegram":
+    //     //         MyNotifier.TelegramNotifier("sd");
+    //     //     break;
+    //     // }
+    //
+    //     notifier("User created.");
+    // }
 
     public User(int id)
     {
@@ -70,7 +81,7 @@ internal class User
 
     public void DoWork()
     {
-        
+        OnStartingWork?.Invoke(this, null);
     }
 
     ~User()
