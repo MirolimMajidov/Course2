@@ -76,9 +76,9 @@ internal class User
         Id = id;
     }
 
-    public User(int id, string email) : this(id)
+    public User(int id, string name) : this(id)
     {
-        Email = email;
+        FirstName = name;
     }
 
     public void DoWork()
