@@ -10,15 +10,21 @@ public class Program
 {
     internal static ConcurrentQueue<User> Users = new ConcurrentQueue<User>();
     public static SemaphoreSlim _pool = new SemaphoreSlim(initialCount: 0);
+
     public static void Main()
     {
-        for (int i = 1; i <= 10; i++)
-        {
-            Users.Enqueue(new User(i, $"User {i}"));
-            
-            Thread t = new Thread(Worker);
-            t.Start();
-        }
+        Task.Run(() => MyJob(1));
+        Task.Run(() => MyJob(2));
+        Task.Run(() => MyJob(3));
+        Task.Run(() => MyJob(4));
+
+        // for (int i = 1; i <= 10; i++)
+        // {
+        //     Users.Enqueue(new User(i, $"User {i}"));
+        //     
+        //     Thread t = new Thread(Worker);
+        //     t.Start();
+        // }
 
         Thread.Sleep(500);
 
@@ -27,7 +33,7 @@ public class Program
 
         Console.WriteLine("Main thread exits.");
     }
-    
+
 
     static void Worker()
     {
@@ -41,11 +47,10 @@ public class Program
         Console.WriteLine("User {0} releases the semaphore.", user!.Id);
         _pool.Release();
     }
+
+    static void MyJob(object id)
+    {
+        Console.WriteLine("MyJob ({1}) is running on thread {0}", Thread.CurrentThread.ManagedThreadId, id);
+        Thread.Sleep(1000);
+    }
 }
-
-// static void MyJob(object id)
-// {
-//     Console.WriteLine("MyJob ({1}) is running on thread {0}", Thread.CurrentThread.ManagedThreadId, id);
-//     Thread.Sleep(1000);
-// }
-
