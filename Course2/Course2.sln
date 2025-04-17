@@ -2,6 +2,8 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyFirstApp", "MyFirstApp\MyFirstApp.csproj", "{6BC52A62-5FEB-4906-BC4B-270878283EDB}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BankManagementSystem", "BankManagementSystem\BankManagementSystem.csproj", "{3767B8FF-34CA-4C36-975D-14E83F39AF72}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -12,5 +14,9 @@ Global
 		{6BC52A62-5FEB-4906-BC4B-270878283EDB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6BC52A62-5FEB-4906-BC4B-270878283EDB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6BC52A62-5FEB-4906-BC4B-270878283EDB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3767B8FF-34CA-4C36-975D-14E83F39AF72}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3767B8FF-34CA-4C36-975D-14E83F39AF72}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3767B8FF-34CA-4C36-975D-14E83F39AF72}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3767B8FF-34CA-4C36-975D-14E83F39AF72}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
