@@ -5,11 +5,11 @@ namespace BankManagementSystem.Controllers;
 
 [ApiController]
 [Route("[controller]")]
-public class UserController : ControllerBase
+public class ClientController : ControllerBase
 {
-    private static readonly User[] Users =
+    private static readonly Client[] Clients =
     [
-        new User
+        new Client
         {
             Id = Guid.NewGuid(),
             FirstName = "John",
@@ -17,7 +17,7 @@ public class UserController : ControllerBase
             Age = 30,
             Email = "John@test.tj"
         },
-        new User
+        new Client
         {
             Id = Guid.NewGuid(),
             FirstName = "Ali",
@@ -28,8 +28,8 @@ public class UserController : ControllerBase
     ];
 
     [HttpGet(Name = "GetAll")]
-    public IEnumerable<User> GetAll()
+    public IEnumerable<Client> GetAll()
     {
-        return Users;
+        return Clients;
     }
 }
