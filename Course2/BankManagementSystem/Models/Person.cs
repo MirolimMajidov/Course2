@@ -1,6 +1,6 @@
 namespace BankManagementSystem.Models;
 
-public abstract class Person
+public abstract class Person : IPerson, IWork
 {
     public Guid Id { get; set; }
 
@@ -9,6 +9,12 @@ public abstract class Person
     public string LastName { get; set; }
 
     public int Age { get; set; }
+    
+    int IPerson.Age
+    {
+        get => (int)Age * 2;
+        set => Age = value;
+    }
 
     public Person(Guid? id = null)
     {
