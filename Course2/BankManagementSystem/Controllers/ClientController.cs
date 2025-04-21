@@ -32,4 +32,13 @@ public class ClientController : ControllerBase
     {
         return Clients;
     }
+
+    [HttpPost(Name = "Test")]
+    public IActionResult Test()
+    {
+        
+        
+        
+        return Ok("Test");
+    }
 }
