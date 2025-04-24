@@ -2,22 +2,26 @@ using System.Numerics;
 
 namespace MyFirstApp.Models;
 
-public class Calculator
+public class Calculator<T>
+    where T : INumber<T>
 {
-    public T Add<T>(T a, T b)
-        where T : INumber<T>
+    public T MultiplyCount { get; set; }
+    
+    public TInternal Add<TInternal>(TInternal a, TInternal b)
+        where TInternal : INumber<TInternal>
     {
         return a + b;
     }
 
-    public int Subtract(int a, int b)
+    public T Subtract(T a, T b)
     {
         return a - b;
     }
 
-    public int Multiply(int a, int b)
+    public T Multiply(T a, T b)
     {
-        return a * b;
+        var result = a * b;
+        return result * MultiplyCount;
     }
 
     public int Divide(int a, int b)
