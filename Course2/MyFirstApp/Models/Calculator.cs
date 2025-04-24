@@ -3,7 +3,7 @@ using System.Numerics;
 namespace MyFirstApp.Models;
 
 public class Calculator<T>
-    where T : INumber<T>
+    where T : INumber<T>//,class, new()
 {
     public T MultiplyCount { get; set; }
     
