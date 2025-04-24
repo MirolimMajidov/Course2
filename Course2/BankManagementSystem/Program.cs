@@ -1,5 +1,4 @@
 using BankManagementSystem.Models;
-using Microsoft.OpenApi.Models;
 
 
 var client = new Client();
