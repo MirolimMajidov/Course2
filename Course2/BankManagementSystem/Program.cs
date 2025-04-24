@@ -1,24 +1,5 @@
-using BankManagementSystem.Models;
+using Microsoft.OpenApi.Models;
 
-
-var client = new Client();
-client.DoWork();
-var type = client.GetActualType();
-Console.WriteLine(type);
-
-var worker = new Worker();
-worker.DoWork();
-
-client.Age = 20;
-var person = (Person)client;
-person.Age = 25;
-var iPerson = (IPerson)client;
-
-Console.WriteLine("Client Age: " + client.Age);
-Console.WriteLine("Person Age: " + person.Age);
-Console.WriteLine("iPerson Age: " + iPerson.Age);
-
-/*
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
@@ -46,4 +27,3 @@ app.UseAuthorization();
 app.MapControllers();
 
 app.Run();
-*/

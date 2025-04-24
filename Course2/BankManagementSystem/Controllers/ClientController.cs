@@ -4,10 +4,10 @@ using Microsoft.AspNetCore.Mvc;
 namespace BankManagementSystem.Controllers;
 
 [ApiController]
-[Route("[controller]")]
+[Route("api/[controller]")]
 public class ClientController : ControllerBase
 {
-    private static readonly Client[] Clients =
+    private static readonly List<Client> Clients =
     [
         new Client
         {
@@ -27,18 +27,27 @@ public class ClientController : ControllerBase
         }
     ];
 
-    [HttpGet(Name = "GetAll")]
+    [HttpGet]
+    //[HttpGet("[action]")]
+    //[HttpGet("GetAll")]
     public IEnumerable<Client> GetAll()
     {
         return Clients;
     }
+    
+    [HttpGet("{id:guid}")]
+    public IActionResult GetById(Guid id)
+    {
+        var client = Clients.SingleOrDefault(x => x.Id == id);
+        if(client is null)
+            return NotFound();
 
-    [HttpPost(Name = "Test")]
+        return Ok(client);
+    }
+
+    [HttpPost]
     public IActionResult Test()
     {
-        
-        
-        
         return Ok("Test");
     }
 }
