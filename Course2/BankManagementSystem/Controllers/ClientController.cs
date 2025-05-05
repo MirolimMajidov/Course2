@@ -1,3 +1,5 @@
+using BankManagementSystem.DTOs.ClientDTOs;
+using BankManagementSystem.Extensions;
 using BankManagementSystem.Models;
 using Microsoft.AspNetCore.Mvc;
 
@@ -28,48 +30,82 @@ public class ClientController : ControllerBase
     ];
 
     [HttpGet]
-    public IEnumerable<Client> GetAll()
+    public IEnumerable<ClientDto> GetAll()
     {
-        return Clients;
+        return Clients.Select(c => c.ToClientDto());
     }
-    
+
     [HttpGet("{id:guid}")]
     public IActionResult GetById(Guid id)
     {
         var client = Clients.SingleOrDefault(x => x.Id == id);
-        if(client is null)
+        if (client is null)
             return NotFound();
 
-        return Ok(client);
+        return Ok(client.ToClientDto());
     }
 
     [HttpPost]
-    public IActionResult Create(Client client)
+    public IActionResult Create(CreateClient createClient)
     {
-        if (client is null)
+        if (createClient is null)
             return BadRequest("Client is null");
 
-        client.Id = Guid.NewGuid();
-        Clients.Add(client);
-        
-        return Created($"/api/client/{client.Id}", client);
+        var createdClient = new Client
+        {
+            FirstName = createClient.FirstName,
+            LastName = createClient.LastName,
+            Age = createClient.Age,
+            Email = createClient.Email
+        };
+        Clients.Add(createdClient);
+
+        return Created($"/api/client/{createdClient.Id}", createdClient.ToClientDto());
     }
 
     [HttpPut]
-    public IActionResult Update(Client client)
+    public IActionResult Update(Guid id, UpdateClient updateClient)
     {
-        if (client is null)
+        if (updateClient is null)
             return BadRequest("Client is null");
 
-        var oldClient = Clients.SingleOrDefault(x => x.Id == client.Id);
-        if (oldClient is null)
+        var serversideClient = Clients.SingleOrDefault(x => x.Id == id);
+        if (serversideClient is null)
             return NotFound();
 
-        oldClient.FirstName = client.FirstName;
-        oldClient.LastName = client.LastName;
-        oldClient.Age = client.Age;
-        oldClient.Email = client.Email;
-        
-        return Ok(oldClient);
+        serversideClient.FirstName = updateClient.FirstName;
+        serversideClient.LastName = updateClient.LastName;
+        serversideClient.Age = updateClient.Age;
+
+        return Ok(serversideClient.ToClientDto());
+    }
+
+    [HttpPatch]
+    public IActionResult UpdateSpecificProperties(Guid id, PatchUpdateClient updateClient)
+    {
+        if (updateClient is null)
+            return BadRequest("Client is null");
+
+        var serversideClient = Clients.SingleOrDefault(x => x.Id == id);
+        if (serversideClient is null)
+            return NotFound();
+
+        // if (updateClient.FirstName is not null)
+        //     serversideClient.FirstName = updateClient.FirstName;
+
+        var serversideClientType = serversideClient.GetType();
+        var properties = updateClient.GetType().GetProperties();
+        foreach (var property in properties)
+        {
+            var value = property.GetValue(updateClient);
+            if (value is not null)
+            {
+                var oldProperty = serversideClientType.GetProperty(property.Name);
+                if (oldProperty?.CanWrite == true)
+                    oldProperty.SetValue(serversideClient, value);
+            }
+        }
+
+        return Ok(serversideClient.ToClientDto());
     }
 }
