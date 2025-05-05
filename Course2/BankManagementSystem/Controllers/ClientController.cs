@@ -28,8 +28,6 @@ public class ClientController : ControllerBase
     ];
 
     [HttpGet]
-    //[HttpGet("[action]")]
-    //[HttpGet("GetAll")]
     public IEnumerable<Client> GetAll()
     {
         return Clients;
@@ -46,8 +44,32 @@ public class ClientController : ControllerBase
     }
 
     [HttpPost]
-    public IActionResult Test()
+    public IActionResult Create(Client client)
     {
-        return Ok("Test");
+        if (client is null)
+            return BadRequest("Client is null");
+
+        client.Id = Guid.NewGuid();
+        Clients.Add(client);
+        
+        return Created($"/api/client/{client.Id}", client);
+    }
+
+    [HttpPut]
+    public IActionResult Update(Client client)
+    {
+        if (client is null)
+            return BadRequest("Client is null");
+
+        var oldClient = Clients.SingleOrDefault(x => x.Id == client.Id);
+        if (oldClient is null)
+            return NotFound();
+
+        oldClient.FirstName = client.FirstName;
+        oldClient.LastName = client.LastName;
+        oldClient.Age = client.Age;
+        oldClient.Email = client.Email;
+        
+        return Ok(oldClient);
     }
 }

@@ -5,18 +5,10 @@ public sealed class Client : Person
     public string Email { get; set; }
 
     public string Nickname { get; }
-    
-    public new double Age { get; set; }
 
-    public Client(Guid? id = null) : base(id)
+    public Client()
     {
         Nickname = Guid.NewGuid().ToString();
-    }
-
-    public Client(Guid id, string email) : this(id)
-    {
-        Id = id;
-        Email = email;
     }
 
     public override string GetActualType()
@@ -26,12 +18,6 @@ public sealed class Client : Person
 
     public override void DoWork()
     {
-        // base.DoWork();
-        //
-        // if (Email != null)
-        // {
-        //     //Do something with Email
-        // }
         Console.WriteLine("Client is doing work...");
     }
 }
