@@ -9,6 +9,7 @@ builder.Services.AddControllers();
 builder.Services.AddOpenApi();
 
 builder.Services.AddSingleton<IClientRepository, ClientRepository>();
+builder.Services.AddSingleton<IWorkerRepository, WorkerRepository>();
 
 builder.Services.AddSwaggerGen(c =>
 {

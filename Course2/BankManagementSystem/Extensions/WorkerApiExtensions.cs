@@ -1,17 +1,35 @@
+using BankManagementSystem.DTOs.WorkerDTOs;
+using BankManagementSystem.Models;
+using BankManagementSystem.Repositories;
+using Microsoft.AspNetCore.Mvc;
+
 namespace BankManagementSystem.Extensions;
 
 public static class WorkerApiExtensions
 {
     public static void MapWorkerAPIs(this WebApplication app)
     {
-        app.MapGet("api/Worker", () =>
+        app.MapGet("api/Worker", ([FromServices] IWorkerRepository repository) =>
         {
-            return Results.Ok(new { Info = "Bank Management System" });
+           var workers= repository.GetAll().Select(c => c.ToDto());
+            
+            return Results.Ok(workers);
         });
 
-        app.MapPost("api/Worker", (string message) =>
+        app.MapPost("api/Worker", ([FromBody] CreateWorker createWorker, [FromServices] IWorkerRepository repository) =>
         {
-            return Results.Ok(new { Message =  $"Hi, {message}" });
+            if (createWorker is null)
+                return Results.BadRequest("Worker is null");
+
+            var createdWorker = new Worker
+            {
+                FirstName = createWorker.FirstName,
+                LastName = createWorker.LastName,
+                Age = createWorker.Age
+            };
+            repository.Add(createdWorker);
+
+            return Results.Ok(createdWorker.ToDto());
         });
     }
 }
