@@ -1,3 +1,4 @@
+using BankManagementSystem.Extensions;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.OpenApi.Models;
 
@@ -26,15 +27,7 @@ if (app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 app.UseAuthorization();
 
-app.MapGet("api/ServerInfo", () =>
-{
-    return Results.Ok(new { Info = "Bank Management System" });
-});
-
-app.MapPost("api/Message", (string message) =>
-{
-    return Results.Ok(new { Message =  $"Hi, {message}" });
-});
+app.MapAllMinimalAPIs();
 
 app.MapControllers();
 
