@@ -1,6 +1,7 @@
 using BankManagementSystem.DTOs.ClientDTOs;
 using BankManagementSystem.Extensions;
 using BankManagementSystem.Models;
+using BankManagementSystem.Repositories;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BankManagementSystem.Controllers;
@@ -9,45 +10,27 @@ namespace BankManagementSystem.Controllers;
 [Route("api/[controller]")]
 public class ClientController : ControllerBase
 {
-    private static readonly List<Client> Clients =
-    [
-        new Client
-        {
-            Id = Guid.NewGuid(),
-            FirstName = "John",
-            LastName = "Doe",
-            Age = 30,
-            Email = "John@test.tj"
-        },
-        new Client
-        {
-            Id = Guid.NewGuid(),
-            FirstName = "Ali",
-            LastName = "Vali",
-            Age = 10,
-            Email = "Ali@test.tj"
-        }
-    ];
+    private readonly IClientRepository _clientRepository;
 
-    public ClientController()
+    public ClientController(IClientRepository clientRepository)
     {
-        
+        _clientRepository = clientRepository;
     }
 
     [HttpGet]
     public IEnumerable<ClientDto> GetAll()
     {
-        return Clients.Select(c => c.ToClientDto());
+        return _clientRepository.GetAll().Select(c => c.ToClientDto());
     }
 
     [HttpGet("{id:guid}")]
     public IActionResult GetById(Guid id)
     {
-        var client = Clients.SingleOrDefault(x => x.Id == id);
-        if (client is null)
+        var serversideClient = _clientRepository.GetById(id);
+        if (serversideClient is null)
             return NotFound();
 
-        return Ok(client.ToClientDto());
+        return Ok(serversideClient.ToClientDto());
     }
 
     [HttpPost]
@@ -63,7 +46,7 @@ public class ClientController : ControllerBase
             Age = createClient.Age,
             Email = createClient.Email
         };
-        Clients.Add(createdClient);
+        _clientRepository.Add(createdClient);
 
         return Created($"/api/client/{createdClient.Id}", createdClient.ToClientDto());
     }
@@ -74,13 +57,15 @@ public class ClientController : ControllerBase
         if (updateClient is null)
             return BadRequest("Client is null");
 
-        var serversideClient = Clients.SingleOrDefault(x => x.Id == id);
+        var serversideClient = _clientRepository.GetById(id);
         if (serversideClient is null)
             return NotFound();
 
         serversideClient.FirstName = updateClient.FirstName;
         serversideClient.LastName = updateClient.LastName;
         serversideClient.Age = updateClient.Age;
+        
+        _clientRepository.TryUpdate(id, serversideClient);
 
         return Ok(serversideClient.ToClientDto());
     }
@@ -90,8 +75,8 @@ public class ClientController : ControllerBase
     {
         if (updateClient is null)
             return BadRequest("Client is null");
-
-        var serversideClient = Clients.SingleOrDefault(x => x.Id == id);
+        
+        var serversideClient = _clientRepository.GetById(id);
         if (serversideClient is null)
             return NotFound();
 
@@ -110,6 +95,8 @@ public class ClientController : ControllerBase
                     oldProperty.SetValue(serversideClient, value);
             }
         }
+        
+        _clientRepository.TryUpdate(id, serversideClient);
 
         return Ok(serversideClient.ToClientDto());
     }
@@ -117,12 +104,10 @@ public class ClientController : ControllerBase
     [HttpDelete]
     public IActionResult Delete(Guid id)
     {
-        var serversideClient = Clients.SingleOrDefault(x => x.Id == id);
-        if (serversideClient is null)
+        var deletedClient = _clientRepository.Delete(id);
+        if (deletedClient is null)
             return NotFound();
 
-        Clients.Remove(serversideClient);
-
-        return Ok(serversideClient.ToClientDto());
+        return Ok(deletedClient.ToClientDto());
     }
 }

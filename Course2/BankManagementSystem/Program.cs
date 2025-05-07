@@ -1,4 +1,5 @@
 using BankManagementSystem.Extensions;
+using BankManagementSystem.Repositories;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.OpenApi.Models;
 
@@ -6,6 +7,8 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
 builder.Services.AddOpenApi();
+
+builder.Services.AddSingleton<IClientRepository, ClientRepository>();
 
 builder.Services.AddSwaggerGen(c =>
 {
@@ -28,7 +31,6 @@ app.UseHttpsRedirection();
 app.UseAuthorization();
 
 app.MapAllMinimalAPIs();
-
 app.MapControllers();
 
 app.Run();
