@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -24,6 +25,17 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 app.UseAuthorization();
+
+app.MapGet("api/ServerInfo", () =>
+{
+    return Results.Ok(new { Info = "Bank Management System" });
+});
+
+app.MapPost("api/Message", (string message) =>
+{
+    return Results.Ok(new { Message =  $"Hi, {message}" });
+});
+
 app.MapControllers();
 
 app.Run();

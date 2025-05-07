@@ -29,6 +29,11 @@ public class ClientController : ControllerBase
         }
     ];
 
+    public ClientController()
+    {
+        
+    }
+
     [HttpGet]
     public IEnumerable<ClientDto> GetAll()
     {
