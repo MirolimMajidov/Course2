@@ -108,4 +108,16 @@ public class ClientController : ControllerBase
 
         return Ok(serversideClient.ToClientDto());
     }
+
+    [HttpDelete]
+    public IActionResult Delete(Guid id)
+    {
+        var serversideClient = Clients.SingleOrDefault(x => x.Id == id);
+        if (serversideClient is null)
+            return NotFound();
+
+        Clients.Remove(serversideClient);
+
+        return Ok(serversideClient.ToClientDto());
+    }
 }
