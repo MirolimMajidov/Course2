@@ -9,14 +9,14 @@ public static class WorkerApiExtensions
 {
     public static void MapWorkerAPIs(this WebApplication app)
     {
-        app.MapGet("api/Worker", ([FromServices] IWorkerRepository repository) =>
+        app.MapGet("api/Worker", ([FromServices] IRepository<Worker> repository) =>
         {
            var workers= repository.GetAll().Select(c => c.ToDto());
             
             return Results.Ok(workers);
         });
 
-        app.MapPost("api/Worker", ([FromBody] CreateWorker createWorker, [FromServices] IWorkerRepository repository) =>
+        app.MapPost("api/Worker", ([FromBody] CreateWorker createWorker, [FromServices] IRepository<Worker> repository) =>
         {
             if (createWorker is null)
                 return Results.BadRequest("Worker is null");

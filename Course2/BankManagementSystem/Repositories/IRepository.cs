@@ -1,0 +1,17 @@
+using BankManagementSystem.Models;
+
+namespace BankManagementSystem.Repositories;
+
+public interface IRepository<TEntity>
+    where TEntity : class, IEntity
+{
+    IEnumerable<TEntity> GetAll();
+    
+    TEntity GetById(Guid id);
+    
+    void Add(TEntity entity);
+    
+    bool TryUpdate(Guid id, TEntity entity);
+    
+    TEntity Delete(Guid id);
+}
