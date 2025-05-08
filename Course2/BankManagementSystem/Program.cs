@@ -1,6 +1,6 @@
 using BankManagementSystem.Extensions;
+using BankManagementSystem.Mappers;
 using BankManagementSystem.Repositories;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -14,6 +14,11 @@ builder.Services.AddSingleton<IWorkerRepository, WorkerRepository>();
 builder.Services.AddSwaggerGen(c =>
 {
     c.SwaggerDoc("v1", new OpenApiInfo { Title = "Bank application APIs", Version = "v1" });
+});
+builder.Services.AddAutoMapper(op=>
+{
+    op.AddMaps(typeof(ClientProfile).Assembly);
+    //op.AddProfile<ClientProfile>();
 });
 
 var app = builder.Build();

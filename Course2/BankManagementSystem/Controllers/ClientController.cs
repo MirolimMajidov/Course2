@@ -1,3 +1,4 @@
+using AutoMapper;
 using BankManagementSystem.DTOs.ClientDTOs;
 using BankManagementSystem.Extensions;
 using BankManagementSystem.Models;
@@ -10,24 +11,38 @@ namespace BankManagementSystem.Controllers;
 [Route("api/[controller]")]
 public class ClientController : ControllerBase
 {
-    [HttpGet]
-    public IEnumerable<ClientDto> GetAll([FromServices] IClientRepository repository)
+    private readonly IClientRepository _repository;
+    private readonly IMapper _mapper;
+
+    public ClientController(IClientRepository repository, [FromServices] IMapper mapper)
     {
-        return repository.GetAll().Select(c => c.ToDto());
+        _repository = repository;
+        _mapper = mapper;
+    }
+    
+    [HttpGet]
+    public IEnumerable<ClientDto> GetAll()
+    {
+        var clients = _repository.GetAll();
+        var clientsDto = _mapper.Map<IEnumerable<ClientDto>>(clients);
+        return clientsDto;
+        //return repository.GetAll().Select(c => c.ToDto());
     }
 
     [HttpGet("{id:guid}")]
-    public IActionResult GetById(Guid id, [FromServices] IClientRepository repository)
+    public IActionResult GetById(Guid id)
     {
-        var serversideClient = repository.GetById(id);
+        var serversideClient = _repository.GetById(id);
         if (serversideClient is null)
             return NotFound();
 
-        return Ok(serversideClient.ToDto());
+        var result = _mapper.Map<ClientDto>(serversideClient);
+        return Ok(result);
+        //return Ok(serversideClient.ToDto());
     }
 
     [HttpPost]
-    public IActionResult Create(CreateClient createClient, [FromServices] IClientRepository repository)
+    public IActionResult Create(CreateClient createClient)
     {
         if (createClient is null)
             return BadRequest("Client is null");
@@ -39,38 +54,35 @@ public class ClientController : ControllerBase
             Age = createClient.Age,
             Email = createClient.Email
         };
-        repository.Add(createdClient);
+        _repository.Add(createdClient);
 
         return Created($"/api/client/{createdClient.Id}", createdClient.ToDto());
     }
 
     [HttpPut]
-    public IActionResult Update(Guid id, UpdateClient updateClient, [FromServices] IClientRepository repository)
+    public IActionResult Update(Guid id, UpdateClient updateClient)
     {
         if (updateClient is null)
             return BadRequest("Client is null");
 
-        var serversideClient = repository.GetById(id);
+        var serversideClient = _repository.GetById(id);
         if (serversideClient is null)
             return NotFound();
 
-        serversideClient.FirstName = updateClient.FirstName;
-        serversideClient.LastName = updateClient.LastName;
-        serversideClient.Age = updateClient.Age;
+        _mapper.Map(updateClient, serversideClient);
 
-        repository.TryUpdate(id, serversideClient);
+        _repository.TryUpdate(id, serversideClient);
 
         return Ok(serversideClient.ToDto());
     }
 
     [HttpPatch]
-    public IActionResult UpdateSpecificProperties(Guid id, PatchUpdateClient updateClient,
-        [FromServices] IClientRepository repository)
+    public IActionResult UpdateSpecificProperties(Guid id, PatchUpdateClient updateClient)
     {
         if (updateClient is null)
             return BadRequest("Client is null");
 
-        var serversideClient = repository.GetById(id);
+        var serversideClient = _repository.GetById(id);
         if (serversideClient is null)
             return NotFound();
 
@@ -90,13 +102,13 @@ public class ClientController : ControllerBase
             }
         }
 
-        repository.TryUpdate(id, serversideClient);
+        _repository.TryUpdate(id, serversideClient);
 
         return Ok(serversideClient.ToDto());
     }
 
     [HttpDelete]
-    public IActionResult Delete(Guid id, [FromServices] IClientRepository _repository)
+    public IActionResult Delete(Guid id)
     {
         var deletedClient = _repository.Delete(id);
         if (deletedClient is null)
