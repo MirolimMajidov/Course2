@@ -2,6 +2,7 @@ using BankManagementSystem.Extensions;
 using BankManagementSystem.Mappers;
 using BankManagementSystem.Repositories;
 using Microsoft.OpenApi.Models;
+using MapsterMapper;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -21,6 +22,7 @@ builder.Services.AddAutoMapper(op=>
     op.AddMaps(typeof(ClientProfile).Assembly);
     //op.AddProfile<ClientProfile>();
 });
+builder.Services.AddMapster();
 
 var app = builder.Build();
 

@@ -60,7 +60,7 @@ public class ClientController : ControllerBase
     }
 
     [HttpPut]
-    public IActionResult Update(Guid id, UpdateClient updateClient)
+    public IActionResult Update(Guid id, UpdateClient updateClient, [FromServices] MapsterMapper.IMapper mapper)
     {
         if (updateClient is null)
             return BadRequest("Client is null");
@@ -69,7 +69,7 @@ public class ClientController : ControllerBase
         if (serversideClient is null)
             return NotFound();
 
-        _mapper.Map(updateClient, serversideClient);
+        mapper.Map(updateClient, serversideClient);
 
         _repository.TryUpdate(id, serversideClient);
 
