@@ -11,10 +11,10 @@ namespace BankManagementSystem.Controllers;
 [Route("api/[controller]")]
 public class ClientController : ControllerBase
 {
-    private readonly IRepository<Client> _repository;
+    private readonly IClientRepository _repository;
     private readonly IMapper _mapper;
 
-    public ClientController(IRepository<Client> repository, [FromServices] IMapper mapper)
+    public ClientController(IClientRepository repository, [FromServices] IMapper mapper)
     {
         _repository = repository;
         _mapper = mapper;

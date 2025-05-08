@@ -2,15 +2,7 @@ using BankManagementSystem.Models;
 
 namespace BankManagementSystem.Repositories;
 
-public interface IClientRepository
+public interface IClientRepository : IRepository<Client>
 {
-    IEnumerable<Client> GetAll();
-    
-    Client GetById(Guid id);
-    
-    void Add(Client client);
-    
-    bool TryUpdate(Guid id, Client client);
-    
-    Client Delete(Guid id);
+    public IEnumerable<Client> TopTenClients(int count);
 }
