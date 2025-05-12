@@ -1,6 +1,7 @@
 using System.ComponentModel.DataAnnotations;
 using AutoMapper;
 using BankManagementSystem.DTOs.ClientDTOs;
+using BankManagementSystem.Exceptions;
 using BankManagementSystem.Extensions;
 using BankManagementSystem.Models;
 using BankManagementSystem.Repositories;
@@ -26,6 +27,9 @@ public class ClientController : ControllerBase
     public IEnumerable<ClientDto> GetAll()
     {
         var clients = _repository.GetAll();
+        if (!clients.Any())
+            throw new Exception("No clients found");
+        
         var clientsDto = _mapper.Map<IEnumerable<ClientDto>>(clients);
         return clientsDto;
         //return repository.GetAll().Select(c => c.ToDto());
@@ -46,6 +50,16 @@ public class ClientController : ControllerBase
     [HttpPost]
     public IActionResult Create(CreateClient createClient, [FromServices] IValidator<CreateClient> validator)
     {
+        try
+        {
+            if (string.IsNullOrEmpty(createClient.FirstName))
+                throw new BadRequestException("First name is required!");
+        }
+        catch (Exception e)
+        {
+            return BadRequest(e.Message);
+        }
+        
         var result = validator.Validate(createClient);
         if (!result.IsValid)
         {
