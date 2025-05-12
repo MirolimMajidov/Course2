@@ -1,5 +1,6 @@
 using BankManagementSystem.Extensions;
 using BankManagementSystem.Mappers;
+using BankManagementSystem.Middlewares;
 using BankManagementSystem.Repositories;
 using BankManagementSystem.Validations;
 using FluentValidation;
@@ -39,6 +40,7 @@ if (app.Environment.IsDevelopment())
     });
 }
 
+app.UseMiddleware<GlobalExceptionMiddleware>();
 app.UseHttpsRedirection();
 app.UseAuthorization();
 

@@ -50,15 +50,15 @@ public class ClientController : ControllerBase
     [HttpPost]
     public IActionResult Create(CreateClient createClient, [FromServices] IValidator<CreateClient> validator)
     {
-        try
-        {
-            if (string.IsNullOrEmpty(createClient.FirstName))
-                throw new BadRequestException("First name is required!");
-        }
-        catch (Exception e)
-        {
-            return BadRequest(e.Message);
-        }
+        // try
+        // {
+        if (string.IsNullOrEmpty(createClient.FirstName))
+            throw new BadRequestException("First name is required!");
+        // }
+        // catch (Exception e)
+        // {
+        //     return BadRequest(e.Message);
+        // }
         
         var result = validator.Validate(createClient);
         if (!result.IsValid)
