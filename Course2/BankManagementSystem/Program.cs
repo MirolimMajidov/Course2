@@ -1,6 +1,8 @@
 using BankManagementSystem.Extensions;
 using BankManagementSystem.Mappers;
 using BankManagementSystem.Repositories;
+using BankManagementSystem.Validations;
+using FluentValidation;
 using Microsoft.OpenApi.Models;
 using MapsterMapper;
 
@@ -23,6 +25,7 @@ builder.Services.AddAutoMapper(op=>
     //op.AddProfile<ClientProfile>();
 });
 builder.Services.AddMapster();
+builder.Services.AddValidatorsFromAssemblyContaining<CreateClientValidator>();
 
 var app = builder.Build();
 

@@ -1,8 +1,10 @@
+using System.ComponentModel.DataAnnotations;
 using AutoMapper;
 using BankManagementSystem.DTOs.ClientDTOs;
 using BankManagementSystem.Extensions;
 using BankManagementSystem.Models;
 using BankManagementSystem.Repositories;
+using FluentValidation;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BankManagementSystem.Controllers;
@@ -19,7 +21,7 @@ public class ClientController : ControllerBase
         _repository = repository;
         _mapper = mapper;
     }
-    
+
     [HttpGet]
     public IEnumerable<ClientDto> GetAll()
     {
@@ -42,10 +44,14 @@ public class ClientController : ControllerBase
     }
 
     [HttpPost]
-    public IActionResult Create(CreateClient createClient)
+    public IActionResult Create(CreateClient createClient, [FromServices] IValidator<CreateClient> validator)
     {
-        if (createClient is null)
-            return BadRequest("Client is null");
+        var result = validator.Validate(createClient);
+        if (!result.IsValid)
+        {
+            var errors = result.Errors.Select(e => new { e.PropertyName, e.ErrorMessage });
+            return BadRequest(new { Errors = errors });
+        }
 
         var createdClient = new Client
         {
