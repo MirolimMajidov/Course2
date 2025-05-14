@@ -1,6 +1,3 @@
-using System.ComponentModel.DataAnnotations;
-using Microsoft.AspNetCore.Mvc;
-
 namespace BankManagementSystem.DTOs.ClientDTOs;
 
 //public record CreateClient(string FirstName, string LastName, int Age, string Email);

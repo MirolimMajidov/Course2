@@ -1,6 +1,4 @@
 using AutoMapper;
-using BankManagementSystem.DTOs.ClientDTOs;
-using BankManagementSystem.Models;
 
 namespace BankManagementSystem.Mappers;
 

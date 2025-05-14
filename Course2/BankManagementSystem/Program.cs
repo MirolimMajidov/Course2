@@ -2,10 +2,10 @@ using BankManagementSystem.Extensions;
 using BankManagementSystem.Mappers;
 using BankManagementSystem.Middlewares;
 using BankManagementSystem.Repositories;
+using BankManagementSystem.Services;
 using BankManagementSystem.Validations;
 using FluentValidation;
 using Microsoft.OpenApi.Models;
-using MapsterMapper;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -15,6 +15,8 @@ builder.Services.AddOpenApi();
 builder.Services.AddSingleton(typeof(IRepository<>), typeof(Repository<>));
 builder.Services.AddSingleton<IClientRepository, ClientRepository>();
 builder.Services.AddSingleton<IWorkerRepository, WorkerRepository>();
+
+builder.Services.AddScoped<IClientService, ClientService>();
 
 builder.Services.AddSwaggerGen(c =>
 {
