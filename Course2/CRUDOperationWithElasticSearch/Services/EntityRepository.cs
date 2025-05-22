@@ -1,16 +1,20 @@
 ﻿using CRUDOperationWithElasticSearch.Models;
 using CRUDOperationWithElasticSearch.Models.Helpers;
 using Elastic.Clients.Elasticsearch;
+using Microsoft.Extensions.Caching.Hybrid;
 
 namespace CRUDOperationWithElasticSearch.Services;
 
 public class EntityRepository<TEntity> : IEntityRepository<TEntity> where TEntity : BaseEntity
 {
+    private readonly HybridCache _cache;
     private readonly ElasticsearchClient _elasticClient;
     private readonly string _indexName;
 
-    public EntityRepository(ElasticsearchConfig elasticsearchConfig)
+    public EntityRepository(ElasticsearchConfig elasticsearchConfig,
+        HybridCache cache)
     {
+        _cache = cache;
         _indexName = $"{elasticsearchConfig.IndexPrefix}-{typeof(TEntity).Name.ToLower()}";
         _elasticClient = new ElasticsearchClient(new Uri(elasticsearchConfig.Uri));
 
@@ -35,12 +39,22 @@ public class EntityRepository<TEntity> : IEntityRepository<TEntity> where TEntit
 
     public async Task<TEntity> GetByIdAsync(Guid id)
     {
-        var response = await _elasticClient.GetAsync<TEntity>(id, idx => idx.Index(_indexName));
+        var cacheKey = $"{typeof(TEntity).Name}_{id.ToString()}";
 
-        if (response.IsValidResponse)
-            return response.Source;
+        var entity = await _cache.GetOrCreateAsync(
+            cacheKey,
+            async _ =>
+            {
+                var response = await _elasticClient.GetAsync<TEntity>(id, idx => idx.Index(_indexName), _);
+                if (response.IsValidResponse)
+                    return response.Source;
+                
+                return null;
+            },
+            cancellationToken: CancellationToken.None
+        );
 
-        return default;
+        return entity;
     }
 
     public async Task<IEnumerable<TEntity>> GetAllAsync(int? from, int? size)

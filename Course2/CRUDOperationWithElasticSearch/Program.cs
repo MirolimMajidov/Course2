@@ -1,3 +1,4 @@
+using CRUDOperationWithElasticSearch.Extensions;
 using CRUDOperationWithElasticSearch.Models;
 using CRUDOperationWithElasticSearch.Models.Helpers;
 using CRUDOperationWithElasticSearch.Services;
@@ -11,7 +12,7 @@ public class Program
     {
         var builder = WebApplication.CreateBuilder(args);
 
-        #region services
+        #region Services
 
         // Add services to the container.
         builder.Services.AddSingleton(builder.Configuration.GetSection("ElasticsearchConfig").Get<ElasticsearchConfig>());
@@ -21,6 +22,7 @@ public class Program
         builder.Services.AddAuthorizations();
         builder.Services.AddControllers();
         builder.Services.AddEndpointsApiExplorer();
+        builder.ConfigureDistributedAndMemoryCaches();
 
         builder.Services.AddSwaggerGen(c =>
         {
