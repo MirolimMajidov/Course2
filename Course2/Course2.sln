@@ -4,6 +4,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyFirstApp", "MyFirstApp\My
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BankManagementSystem", "BankManagementSystem\BankManagementSystem.csproj", "{3767B8FF-34CA-4C36-975D-14E83F39AF72}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CRUDOperationWithElasticSearch", "CRUDOperationWithElasticSearch\CRUDOperationWithElasticSearch.csproj", "{9C69F954-0D3F-45DD-B39F-B098EE647BFC}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -18,5 +20,9 @@ Global
 		{3767B8FF-34CA-4C36-975D-14E83F39AF72}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3767B8FF-34CA-4C36-975D-14E83F39AF72}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3767B8FF-34CA-4C36-975D-14E83F39AF72}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9C69F954-0D3F-45DD-B39F-B098EE647BFC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9C69F954-0D3F-45DD-B39F-B098EE647BFC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9C69F954-0D3F-45DD-B39F-B098EE647BFC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9C69F954-0D3F-45DD-B39F-B098EE647BFC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
