@@ -1,43 +1,44 @@
+using BankManagementSystem.Database;
 using BankManagementSystem.Models;
 
 namespace BankManagementSystem.Repositories;
 
-public class Repository<TEntity> : IRepository<TEntity>
+public class Repository<TEntity>(BankContext context) : IRepository<TEntity>
     where TEntity : class, IEntity
 {
-    private readonly Dictionary<Guid, TEntity> Entities =  [
-    ];
-    
     public IEnumerable<TEntity> GetAll()
     {
-        return Entities.Values;
+        return context.Set<TEntity>();
     }
 
     public TEntity GetById(Guid id)
     {
-        Entities.TryGetValue(id, out var entity);
+        var entity = context.Find<TEntity>(id);
 
         return entity;
     }
 
     public void Add(TEntity entity)
     {
-        Entities.Add(entity.Id, entity);
+        context.Add(entity);
+        context.SaveChanges();
     }
 
     public bool TryUpdate(Guid id, TEntity entity)
     {
-        if (!Entities.ContainsKey(id)) return false;
+        context.Update(entity);
         
-        Entities[id] = entity;
-        return true;
+        return context.SaveChanges() > 0;
     }
 
     public TEntity Delete(Guid id)
     {
-        Entities.TryGetValue(id, out var entity);
+        var entity = GetById(id);
         if (entity is not null)
-            Entities.Remove(id);
+        {
+            context.Remove(id);
+            context.SaveChanges();
+        }
 
         return entity;
     }

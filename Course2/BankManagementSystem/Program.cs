@@ -1,3 +1,4 @@
+using BankManagementSystem.Database;
 using BankManagementSystem.Extensions;
 using BankManagementSystem.Mappers;
 using BankManagementSystem.Middlewares;
@@ -5,6 +6,7 @@ using BankManagementSystem.Repositories;
 using BankManagementSystem.Services;
 using BankManagementSystem.Validations;
 using FluentValidation;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -12,9 +14,13 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 builder.Services.AddOpenApi();
 
-builder.Services.AddSingleton(typeof(IRepository<>), typeof(Repository<>));
-builder.Services.AddSingleton<IClientRepository, ClientRepository>();
-builder.Services.AddSingleton<IWorkerRepository, WorkerRepository>();
+var databaseConnectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+builder.Services.AddDbContext<BankContext>(options =>
+    options.UseSqlServer(databaseConnectionString));
+
+builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
+builder.Services.AddScoped<IClientRepository, ClientRepository>();
+builder.Services.AddScoped<IWorkerRepository, WorkerRepository>();
 
 builder.Services.AddScoped<IClientService, ClientService>();
 
@@ -25,12 +31,17 @@ builder.Services.AddSwaggerGen(c =>
 builder.Services.AddAutoMapper(op=>
 {
     op.AddMaps(typeof(ClientProfile).Assembly);
-    //op.AddProfile<ClientProfile>();
 });
 builder.Services.AddMapster();
 builder.Services.AddValidatorsFromAssemblyContaining<CreateClientValidator>();
 
 var app = builder.Build();
+
+using (var scope = app.Services.CreateScope())
+{
+    var dbContext = scope.ServiceProvider.GetRequiredService<BankContext>();
+    dbContext.Database.EnsureCreated();
+}
 
 if (app.Environment.IsDevelopment())
 {

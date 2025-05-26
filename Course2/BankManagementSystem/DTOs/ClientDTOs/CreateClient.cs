@@ -1,18 +1,16 @@
+using System.ComponentModel.DataAnnotations;
+
 namespace BankManagementSystem.DTOs.ClientDTOs;
 
-//public record CreateClient(string FirstName, string LastName, int Age, string Email);
 public record CreateClient
 {
-    //[FromRoute]
-    //[Required, MinLength(3), MaxLength(30)]
+    [Required, MinLength(3), MaxLength(30)]
     public string FirstName { get; init; }
     
-    //[FromHeader]
     public string LastName { get; init; }
     
-    //[FromForm]
     public int Age { get; init; }
     
-    //[EmailAddress]
+    [EmailAddress]
     public string Email { get; init; }
 }
