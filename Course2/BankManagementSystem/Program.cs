@@ -1,7 +1,9 @@
+using System.Text.Json.Serialization;
 using BankManagementSystem.Database;
 using BankManagementSystem.Extensions;
 using BankManagementSystem.Mappers;
 using BankManagementSystem.Middlewares;
+using BankManagementSystem.Models;
 using BankManagementSystem.Repositories;
 using BankManagementSystem.Services;
 using BankManagementSystem.Validations;
@@ -11,7 +13,9 @@ using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddControllers();
+builder.Services.AddControllers()
+    .AddJsonOptions(options => options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles);
+
 builder.Services.AddOpenApi();
 
 var databaseConnectionString = builder.Configuration.GetConnectionString("DefaultConnection");
@@ -44,6 +48,33 @@ using (var scope = app.Services.CreateScope())
     var dbContext = scope.ServiceProvider.GetRequiredService<BankContext>();
     dbContext.Database.EnsureDeleted();
     dbContext.Database.EnsureCreated();
+
+    var branch = new Branch
+    {
+        Id = Guid.NewGuid(),
+        Name = "Main Branch",
+        Location = "Khujand",
+    };
+    
+    var worker = new Worker
+    {
+        Id = Guid.NewGuid(),
+        FirstName = "John",
+        LastName = "Doe",
+        BranchId = branch.Id
+    };
+    var worker2 = new Worker
+    {
+        Id = Guid.NewGuid(),
+        FirstName = "Jane",
+        LastName = "Smith",
+        BranchId = branch.Id
+    };
+
+    dbContext.Add(branch);
+    dbContext.AddRange(worker, worker2);
+
+    dbContext.SaveChanges();
 }
 
 if (app.Environment.IsDevelopment())

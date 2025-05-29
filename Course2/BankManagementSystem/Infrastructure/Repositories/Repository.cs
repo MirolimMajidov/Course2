@@ -6,7 +6,7 @@ namespace BankManagementSystem.Repositories;
 public class Repository<TEntity>(BankContext context) : IRepository<TEntity>
     where TEntity : class, IEntity
 {
-    public IEnumerable<TEntity> GetAll()
+    public IQueryable<TEntity> GetAll()
     {
         return context.Set<TEntity>();
     }

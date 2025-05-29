@@ -31,6 +31,4 @@ public abstract class Person : IPerson, IWork
     {
         Console.WriteLine("Doing work...");
     }
-
-    public abstract string GetActualType();
 }

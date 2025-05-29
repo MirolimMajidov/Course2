@@ -11,11 +11,6 @@ public sealed class Client : Person
         Nickname = Guid.NewGuid().ToString();
     }
 
-    public override string GetActualType()
-    {
-        return nameof(Client);
-    }
-
     public override void DoWork()
     {
         Console.WriteLine("Client is doing work...");

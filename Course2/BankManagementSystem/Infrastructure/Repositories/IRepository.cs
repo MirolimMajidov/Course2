@@ -5,7 +5,7 @@ namespace BankManagementSystem.Repositories;
 public interface IRepository<TEntity>
     where TEntity : class, IEntity
 {
-    IEnumerable<TEntity> GetAll();
+    IQueryable<TEntity> GetAll();
     
     TEntity GetById(Guid id);
     

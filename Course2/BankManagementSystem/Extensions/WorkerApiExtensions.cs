@@ -3,6 +3,7 @@ using BankManagementSystem.Models;
 using BankManagementSystem.Repositories;
 using MapsterMapper;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace BankManagementSystem.Extensions;
 
@@ -10,10 +11,10 @@ public static class WorkerApiExtensions
 {
     public static void MapWorkerAPIs(this WebApplication app)
     {
-        app.MapGet("api/Worker", ([FromServices] IWorkerRepository repository, 
+        app.MapGet("api/Worker", ([FromServices] IWorkerRepository repository,
             [FromServices] IMapper mapper) =>
         {
-            var workers = repository.GetAll();
+            var workers = repository.GetAll().Include(w => w.Branch).ToList();
             //var result = workers.Adapt<List<WorkerDto>>();
             var result = mapper.Map<List<WorkerDto>>(workers);
             //var workers = repository.GetAll().Select(c => c.ToDto());
@@ -21,8 +22,8 @@ public static class WorkerApiExtensions
             return Results.Ok(result);
         });
 
-        app.MapPost("api/Worker", ([FromBody] CreateWorker createWorker, 
-            [FromServices] IWorkerRepository repository, 
+        app.MapPost("api/Worker", ([FromBody] CreateWorker createWorker,
+            [FromServices] IWorkerRepository repository,
             [FromServices] IMapper mapper) =>
         {
             if (createWorker is null)
