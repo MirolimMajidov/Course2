@@ -21,7 +21,8 @@ builder.Services.AddOpenApi();
 var databaseConnectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 builder.Services.AddDbContext<BankContext>(options =>
 {
-    options.UseSqlServer(databaseConnectionString);
+    options.UseSqlServer(databaseConnectionString)
+        .LogTo(Console.WriteLine, LogLevel.Information);
 });
 
 builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
