@@ -1,11 +1,17 @@
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+
 namespace BankManagementSystem.Models;
 
 public abstract class Person : IPerson, IWork
 {
+    // [Key]
     public Guid Id { get; set; }
 
+    // [MaxLength(30), Column("Name"), Required]
     public string FirstName { get; set; }
 
+    // [NotMapped]
     public string LastName { get; set; }
 
     public int Age { get; set; }

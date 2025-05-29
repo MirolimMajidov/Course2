@@ -16,7 +16,9 @@ builder.Services.AddOpenApi();
 
 var databaseConnectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 builder.Services.AddDbContext<BankContext>(options =>
-    options.UseSqlServer(databaseConnectionString));
+{
+    options.UseSqlServer(databaseConnectionString);
+});
 
 builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
 builder.Services.AddScoped<IClientRepository, ClientRepository>();
@@ -40,6 +42,7 @@ var app = builder.Build();
 using (var scope = app.Services.CreateScope())
 {
     var dbContext = scope.ServiceProvider.GetRequiredService<BankContext>();
+    dbContext.Database.EnsureDeleted();
     dbContext.Database.EnsureCreated();
 }
 
