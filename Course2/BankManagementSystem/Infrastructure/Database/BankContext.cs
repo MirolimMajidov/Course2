@@ -1,3 +1,4 @@
+using BankManagementSystem.Infrastructure.EntityConfigurations;
 using BankManagementSystem.Models;
 using Microsoft.EntityFrameworkCore;
 
@@ -24,23 +25,29 @@ public class BankContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        modelBuilder.Entity<Person>(entity =>
-        {
-            entity.Property(p => p.FirstName)
-                .HasMaxLength(30)
-                .HasColumnName("Name")
-                .IsRequired();
-           
-            entity.Property(p => p.LastName)
-                .HasMaxLength(15);
-        });
-        
-        modelBuilder.Entity<Client>(entity =>
-        {
-            entity.HasIndex(p => p.Nickname)
-                .IsUnique();
-        });
+        // modelBuilder.Entity<Person>(entity =>
+        // {
+        //     entity.Property(p => p.FirstName)
+        //         .HasMaxLength(30)
+        //         .HasColumnName("Name")
+        //         .IsRequired();
+        //    
+        //     entity.Property(p => p.LastName)
+        //         .HasMaxLength(15);
+        // });
+        //
+        // modelBuilder.Entity<Client>(entity =>
+        // {
+        //     entity.HasIndex(p => p.Nickname)
+        //         .IsUnique();
+        // });
 
+        // modelBuilder.ApplyConfiguration(new PersonConfiguration());
+        // modelBuilder.ApplyConfiguration(new ClientConfiguration());
+        
+        var assembly = typeof(PersonConfiguration).Assembly;
+        modelBuilder.ApplyConfigurationsFromAssembly(assembly);
+        
         base.OnModelCreating(modelBuilder);
     }
 }
