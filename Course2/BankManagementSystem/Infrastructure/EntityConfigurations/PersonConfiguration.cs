@@ -9,7 +9,7 @@ public class PersonConfiguration : IEntityTypeConfiguration<Person>
     public void Configure(EntityTypeBuilder<Person> entityBuilder)
     {
         entityBuilder.ToTable("People");
-        
+
         entityBuilder.Property(p => p.FirstName)
             .HasMaxLength(30)
             .HasColumnName("Name")
@@ -17,5 +17,7 @@ public class PersonConfiguration : IEntityTypeConfiguration<Person>
 
         entityBuilder.Property(p => p.LastName)
             .HasMaxLength(15);
+
+        entityBuilder.HasQueryFilter(p => !p.IsDeleted);
     }
 }

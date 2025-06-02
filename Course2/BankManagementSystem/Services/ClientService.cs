@@ -5,14 +5,17 @@ using BankManagementSystem.Models;
 using BankManagementSystem.Repositories;
 using FluentValidation;
 using FluentValidation.Results;
+using Microsoft.EntityFrameworkCore;
 
 namespace BankManagementSystem.Services;
 
-public class ClientService(IClientRepository repository, IMapper mapper, IServiceProvider serviceProvider) : IClientService
+public class ClientService(IClientRepository repository, IMapper mapper, IServiceProvider serviceProvider)
+    : IClientService
 {
     public IEnumerable<ClientDto> GetAll()
     {
         var clients = repository.GetAll();
+            //.IgnoreQueryFilters();
         var clientsDto = mapper.Map<IEnumerable<ClientDto>>(clients);
         return clientsDto;
     }
@@ -24,7 +27,7 @@ public class ClientService(IClientRepository repository, IMapper mapper, IServic
             return null;
 
         var result = mapper.Map<ClientDto>(serversideClient);
-        
+
         return result;
     }
 
@@ -32,12 +35,12 @@ public class ClientService(IClientRepository repository, IMapper mapper, IServic
     {
         if (string.IsNullOrEmpty(createClient.FirstName))
             throw new BadRequestException("First name is required!");
-        
+
         var validator = serviceProvider.GetService<IValidator<CreateClient>>();
         var result = validator.Validate(createClient);
         if (!result.IsValid)
         {
-           return (result, null);
+            return (result, null);
         }
 
         var createdClient = new Client
@@ -48,9 +51,9 @@ public class ClientService(IClientRepository repository, IMapper mapper, IServic
             Email = createClient.Email
         };
         repository.Add(createdClient);
-        
+
         var createdClientDto = mapper.Map<ClientDto>(createdClient);
-        
+
         return (null, createdClientDto);
     }
 

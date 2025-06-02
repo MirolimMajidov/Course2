@@ -16,6 +16,8 @@ public abstract class Person : IPerson, IWork
 
     public int Age { get; set; }
     
+    public bool IsDeleted { get; set; }
+    
     int IPerson.Age
     {
         get => (int)Age * 2;
