@@ -1,3 +1,5 @@
+using System.ComponentModel;
+using BankManagementSystem.Infrastructure.Convertors;
 using BankManagementSystem.Infrastructure.EntityConfigurations;
 using BankManagementSystem.Models;
 using Microsoft.EntityFrameworkCore;
@@ -6,9 +8,10 @@ namespace BankManagementSystem.Database;
 
 public class BankContext : DbContext
 {
-    public DbSet<Person> Persons { get; set; }
+    public DbSet<Person> People { get; set; }
     public DbSet<Worker> Workers { get; set; }
     public DbSet<Client> Clients { get; set; }
+    public DbSet<Branch> Branches { get; set; }
 
     public BankContext(DbContextOptions<BankContext> options) : base(options)
     {
@@ -49,5 +52,12 @@ public class BankContext : DbContext
         modelBuilder.ApplyConfigurationsFromAssembly(assembly);
         
         base.OnModelCreating(modelBuilder);
+    }
+    
+    protected override void ConfigureConventions(ModelConfigurationBuilder configurationBuilder)
+    {
+        configurationBuilder
+            .Properties<DateTimeOffset>()
+            .HaveConversion<DateTimeOffSetConvertor>();
     }
 }

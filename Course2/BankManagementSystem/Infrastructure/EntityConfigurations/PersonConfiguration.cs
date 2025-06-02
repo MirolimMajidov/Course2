@@ -8,6 +8,8 @@ public class PersonConfiguration : IEntityTypeConfiguration<Person>
 {
     public void Configure(EntityTypeBuilder<Person> entityBuilder)
     {
+        entityBuilder.ToTable("People");
+        
         entityBuilder.Property(p => p.FirstName)
             .HasMaxLength(30)
             .HasColumnName("Name")
