@@ -36,7 +36,7 @@ public class Repository<TEntity>(BankContext context) : IRepository<TEntity>
         var entity = GetById(id);
         if (entity is not null)
         {
-            context.Remove(id);
+            context.Remove(entity);
             context.SaveChanges();
         }
 

@@ -1,6 +1,7 @@
 using System.Text.Json.Serialization;
 using BankManagementSystem.Database;
 using BankManagementSystem.Extensions;
+using BankManagementSystem.Infrastructure.Interceptors;
 using BankManagementSystem.Mappers;
 using BankManagementSystem.Middlewares;
 using BankManagementSystem.Models;
@@ -17,12 +18,14 @@ builder.Services.AddControllers()
     .AddJsonOptions(options => options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles);
 
 builder.Services.AddOpenApi();
+builder.Services.AddSingleton<AvoidDeletingPersonInterceptor>();
 
 var databaseConnectionString = builder.Configuration.GetConnectionString("DefaultConnection");
-builder.Services.AddDbContext<BankContext>(options =>
+builder.Services.AddDbContext<BankContext>((sp, options) =>
 {
     options.UseSqlServer(databaseConnectionString)
-        .LogTo(Console.WriteLine, LogLevel.Information);
+        .LogTo(Console.WriteLine, LogLevel.Information)
+        .AddInterceptors(sp.GetRequiredService<AvoidDeletingPersonInterceptor>());
 });
 
 builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
