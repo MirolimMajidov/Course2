@@ -1,6 +1,6 @@
 using BankManagementSystem.Models;
 
-namespace BankManagementSystem.Repositories;
+namespace BankManagementSystem.Infrastructure.Repositories;
 
 public interface IClientRepository : IRepository<Client>
 {

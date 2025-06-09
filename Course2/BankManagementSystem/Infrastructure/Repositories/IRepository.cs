@@ -1,6 +1,6 @@
 using BankManagementSystem.Models;
 
-namespace BankManagementSystem.Repositories;
+namespace BankManagementSystem.Infrastructure.Repositories;
 
 public interface IRepository<TEntity>
     where TEntity : class, IEntity

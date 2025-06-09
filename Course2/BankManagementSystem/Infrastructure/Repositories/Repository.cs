@@ -1,7 +1,7 @@
-using BankManagementSystem.Database;
+using BankManagementSystem.Infrastructure.Database;
 using BankManagementSystem.Models;
 
-namespace BankManagementSystem.Repositories;
+namespace BankManagementSystem.Infrastructure.Repositories;
 
 public class Repository<TEntity>(BankContext context) : IRepository<TEntity>
     where TEntity : class, IEntity

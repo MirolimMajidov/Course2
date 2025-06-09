@@ -1,8 +1,8 @@
 using AutoMapper;
 using BankManagementSystem.DTOs.ClientDTOs;
 using BankManagementSystem.Exceptions;
+using BankManagementSystem.Infrastructure.Repositories;
 using BankManagementSystem.Models;
-using BankManagementSystem.Repositories;
 using FluentValidation;
 using FluentValidation.Results;
 using Microsoft.EntityFrameworkCore;

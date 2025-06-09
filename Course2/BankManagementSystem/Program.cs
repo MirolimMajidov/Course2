@@ -1,11 +1,11 @@
 using System.Text.Json.Serialization;
-using BankManagementSystem.Database;
 using BankManagementSystem.Extensions;
+using BankManagementSystem.Infrastructure.Database;
 using BankManagementSystem.Infrastructure.Interceptors;
+using BankManagementSystem.Infrastructure.Repositories;
 using BankManagementSystem.Mappers;
 using BankManagementSystem.Middlewares;
 using BankManagementSystem.Models;
-using BankManagementSystem.Repositories;
 using BankManagementSystem.Services;
 using BankManagementSystem.Validations;
 using FluentValidation;
@@ -30,7 +30,8 @@ builder.Services.AddDbContext<BankContext>((sp, options) =>
 
 builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
 builder.Services.AddScoped<IClientRepository, ClientRepository>();
-builder.Services.AddScoped<IWorkerRepository, WorkerRepository>();
+builder.Services.AddScoped<IWorkerRepository, WorkerRepository>();;
+builder.Services.AddScoped<IBranchRepository, BranchRepository>();
 
 builder.Services.AddScoped<IClientService, ClientService>();
 
@@ -47,6 +48,7 @@ var app = builder.Build();
 using (var scope = app.Services.CreateScope())
 {
     var dbContext = scope.ServiceProvider.GetRequiredService<BankContext>();
+    dbContext.Database.EnsureCreated();
     if (!dbContext.Clients.Any())
     {
         // dbContext.Database.EnsureDeleted();

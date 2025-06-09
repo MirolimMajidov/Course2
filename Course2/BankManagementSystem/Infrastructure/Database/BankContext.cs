@@ -1,10 +1,9 @@
-using System.ComponentModel;
 using BankManagementSystem.Infrastructure.Convertors;
 using BankManagementSystem.Infrastructure.EntityConfigurations;
 using BankManagementSystem.Models;
 using Microsoft.EntityFrameworkCore;
 
-namespace BankManagementSystem.Database;
+namespace BankManagementSystem.Infrastructure.Database;
 
 public class BankContext : DbContext
 {

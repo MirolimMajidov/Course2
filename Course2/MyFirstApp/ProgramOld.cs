@@ -7,6 +7,8 @@ using System.Collections.Concurrent;
 using System.Diagnostics;
 using MyFirstApp.Models;
 
+namespace MyFirstApp;
+
 public class ProgramOld
 {
     internal static ConcurrentQueue<User> Users = new ConcurrentQueue<User>();

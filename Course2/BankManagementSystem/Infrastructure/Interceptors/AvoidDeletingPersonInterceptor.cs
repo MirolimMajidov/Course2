@@ -34,8 +34,15 @@ public class AvoidDeletingPersonInterceptor : SaveChangesInterceptor
         {
             if (entry.State == EntityState.Deleted)
             {
-                entry.State = EntityState.Modified;
-                entry.Entity.IsDeleted = true;
+                if(entry.Entity.LastName == "Admin" || entry.Entity.FirstName == "Admin")
+                {
+                    entry.State = EntityState.Detached;
+                }
+                else
+                {
+                    entry.State = EntityState.Modified;
+                    entry.Entity.IsDeleted = true;
+                }
             }
         }
     }

@@ -1,7 +1,7 @@
-using BankManagementSystem.Database;
+using BankManagementSystem.Infrastructure.Database;
 using BankManagementSystem.Models;
 
-namespace BankManagementSystem.Repositories;
+namespace BankManagementSystem.Infrastructure.Repositories;
 
 public class ClientRepository(BankContext context) : Repository<Client>(context), IClientRepository
 {

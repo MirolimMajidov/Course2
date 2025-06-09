@@ -1,6 +1,6 @@
 using BankManagementSystem.DTOs.WorkerDTOs;
+using BankManagementSystem.Infrastructure.Repositories;
 using BankManagementSystem.Models;
-using BankManagementSystem.Repositories;
 using MapsterMapper;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
