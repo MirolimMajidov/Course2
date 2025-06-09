@@ -25,7 +25,9 @@ builder.Services.AddDbContext<BankContext>((sp, options) =>
 {
     options.UseSqlServer(databaseConnectionString)
         .LogTo(Console.WriteLine, LogLevel.Information)
-        .AddInterceptors(sp.GetRequiredService<AvoidDeletingPersonInterceptor>());
+        .UseLazyLoadingProxies()
+        .AddInterceptors(sp.GetRequiredService<AvoidDeletingPersonInterceptor>())
+        ;
 });
 
 builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));

@@ -15,8 +15,15 @@ public class BranchController(IBranchRepository repository)
     public IActionResult GetAll()
     {
         var clientsDto = repository.GetAll()
-            //.Include(b=>b.Workers)
+                //.IgnoreAutoIncludes()
+                //.Include(b=>b.Workers)
+                .ToArray()
             ;
+        // foreach (var client in clientsDto)
+        // {
+        //     _ = client.Workers;
+        // }
+
         return Ok(clientsDto);
     }
 

@@ -9,7 +9,7 @@ public class BranchConfiguration : IEntityTypeConfiguration<Branch>
     public void Configure(EntityTypeBuilder<Branch> entityBuilder)
     {
         entityBuilder.HasKey(b=>b.Id);
-        entityBuilder.Navigation(b => b.Workers)
-            .AutoInclude();
+        // entityBuilder.Navigation(b => b.Workers)
+        //     .AutoInclude();
     }
 }

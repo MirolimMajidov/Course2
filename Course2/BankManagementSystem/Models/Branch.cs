@@ -8,7 +8,7 @@ public class Branch : IEntity
     
     public string Location { get; set; }
     
-    public List<Worker> Workers { get; set; } = new();
+    public virtual List<Worker> Workers { get; set; } = new();
     
     public DateTimeOffset CreatedOn { get; set; } = DateTimeOffset.Now;
 } 
