@@ -25,7 +25,7 @@ builder.Services.AddDbContext<BankContext>((sp, options) =>
 {
     options.UseSqlServer(databaseConnectionString)
         .LogTo(Console.WriteLine, LogLevel.Information)
-        .UseLazyLoadingProxies()
+        //.UseLazyLoadingProxies()
         .AddInterceptors(sp.GetRequiredService<AvoidDeletingPersonInterceptor>())
         ;
 });

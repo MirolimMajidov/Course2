@@ -1,4 +1,5 @@
 using BankManagementSystem.DTOs.ClientDTOs;
+using BankManagementSystem.Infrastructure.Database;
 using BankManagementSystem.Infrastructure.Repositories;
 using BankManagementSystem.Services;
 using Microsoft.AspNetCore.Mvc;
@@ -8,7 +9,7 @@ namespace BankManagementSystem.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
-public class BranchController(IBranchRepository repository)
+public class BranchController(IBranchRepository repository, BankContext context)
     : ControllerBase
 {
     [HttpGet]
@@ -33,6 +34,9 @@ public class BranchController(IBranchRepository repository)
         var client = repository.GetById(id);
         if (client is null)
             return NotFound();
+
+        if (client.Location.Contains("Khujand"))
+            context.Entry(client).Collection(p => p.Workers).Load();
 
         return Ok(client);
     }
