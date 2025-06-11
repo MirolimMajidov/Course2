@@ -50,11 +50,9 @@ var app = builder.Build();
 using (var scope = app.Services.CreateScope())
 {
     var dbContext = scope.ServiceProvider.GetRequiredService<BankContext>();
-    dbContext.Database.EnsureCreated();
+    dbContext.Database.Migrate();
     if (!dbContext.Clients.Any())
     {
-        // dbContext.Database.EnsureDeleted();
-        // dbContext.Database.EnsureCreated();
         var branch = new Branch
         {
             Id = Guid.NewGuid(),
