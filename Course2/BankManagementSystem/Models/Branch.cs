@@ -4,9 +4,9 @@ public class Branch : IEntity
 {
     public Guid Id { get; set; } = Guid.NewGuid();
     
-    public string Name { get; set; }
+    public string FullName { get; set; }
     
-    public string Location { get; set; }
+    public string Address { get; set; }
     
     public virtual List<Worker> Workers { get; set; } = new();
     

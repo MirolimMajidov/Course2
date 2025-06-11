@@ -4,11 +4,13 @@ public class Client : Person
 {
     public string Email { get; set; }
 
-    public string Nickname { get; }
+    public string Password { get; set;}
+
+    public string UserName { get; set;}
 
     public Client()
     {
-        Nickname = Guid.NewGuid().ToString();
+        UserName = Guid.NewGuid().ToString();
     }
 
     public override void DoWork()

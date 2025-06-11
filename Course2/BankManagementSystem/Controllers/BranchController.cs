@@ -35,7 +35,7 @@ public class BranchController(IBranchRepository repository, BankContext context)
         if (client is null)
             return NotFound();
 
-        if (client.Location.Contains("Khujand"))
+        if (client.Address.Contains("Khujand"))
             context.Entry(client).Collection(p => p.Workers).Load();
 
         return Ok(client);

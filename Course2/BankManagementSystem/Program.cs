@@ -56,22 +56,22 @@ using (var scope = app.Services.CreateScope())
         var branch = new Branch
         {
             Id = Guid.NewGuid(),
-            Name = "Main Branch",
-            Location = "Khujand",
+            FullName = "Main Branch",
+            Address = "Khujand",
             CreatedOn = new DateTimeOffset(DateTime.Now, TimeSpan.FromHours(5))
         };
         var branch2 = new Branch
         {
             Id = Guid.NewGuid(),
-            Name = "Isfara Branch",
-            Location = "Isfara",
+            FullName = "Isfara Branch",
+            Address = "Isfara",
             //CreatedOn = new DateTimeOffset(DateTime.Now, TimeSpan.FromHours(3))
         };
         var branch3 = new Branch
         {
             Id = Guid.NewGuid(),
-            Name = "Isfara Branch",
-            Location = "Dushanbe",
+            FullName = "Isfara Branch",
+            Address = "Dushanbe",
             // CreatedOn = new DateTimeOffset(DateTime.Now, TimeSpan.FromHours(-2))
         };
 

@@ -8,7 +8,7 @@ public class ClientConfiguration : IEntityTypeConfiguration<Client>
 {
     public void Configure(EntityTypeBuilder<Client> entityBuilder)
     {
-        entityBuilder.HasIndex(p => p.Nickname)
+        entityBuilder.HasIndex(p => p.UserName)
             .IsUnique();
     }
 }

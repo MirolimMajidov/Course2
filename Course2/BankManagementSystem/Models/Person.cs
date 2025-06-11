@@ -13,6 +13,8 @@ public abstract class Person : IPerson, IWork
 
     // [NotMapped]
     public string LastName { get; set; }
+    
+    public string FullName { get; set; }
 
     public int Age { get; set; }
     

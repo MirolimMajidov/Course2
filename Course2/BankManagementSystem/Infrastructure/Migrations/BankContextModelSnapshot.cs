@@ -28,13 +28,13 @@ namespace BankManagementSystem.Infrastructure.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<string>("Address")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<DateTimeOffset>("CreatedOn")
                         .HasColumnType("datetimeoffset");
 
-                    b.Property<string>("Location")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Name")
+                    b.Property<string>("FullName")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
@@ -62,6 +62,9 @@ namespace BankManagementSystem.Infrastructure.Migrations
                         .HasColumnType("nvarchar(30)")
                         .HasColumnName("Name");
 
+                    b.Property<string>("FullName")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 
@@ -85,12 +88,15 @@ namespace BankManagementSystem.Infrastructure.Migrations
                     b.Property<string>("Email")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Nickname")
+                    b.Property<string>("Password")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("UserName")
                         .HasColumnType("nvarchar(450)");
 
-                    b.HasIndex("Nickname")
+                    b.HasIndex("UserName")
                         .IsUnique()
-                        .HasFilter("[Nickname] IS NOT NULL");
+                        .HasFilter("[UserName] IS NOT NULL");
 
                     b.HasDiscriminator().HasValue("Client");
                 });
