@@ -3,7 +3,7 @@ using BankManagementSystem.Exceptions;
 
 namespace BankManagementSystem.Middlewares;
 
-public class GlobalExceptionMiddleware(RequestDelegate next)
+public class GlobalExceptionMiddleware(RequestDelegate next, ILogger<GlobalExceptionMiddleware> logger)
 {
     public async Task InvokeAsync(HttpContext httpContext)
     {
@@ -36,6 +36,13 @@ public class GlobalExceptionMiddleware(RequestDelegate next)
                     stackTrace = ""
                 };
 #endif
+            
+            logger.LogError("An error occurred: {Message}", ex.Message);
+            logger.LogWarning("test1");
+            logger.LogInformation("test1");
+            logger.LogDebug("test1");
+            logger.LogTrace("test1");
+            
             await httpContext.Response.WriteAsJsonAsync<dynamic>(messageInfo);
         }
     }

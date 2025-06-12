@@ -3,7 +3,6 @@ using BankManagementSystem.Infrastructure.Database;
 using BankManagementSystem.Infrastructure.Repositories;
 using BankManagementSystem.Services;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 
 namespace BankManagementSystem.Controllers;
 
@@ -15,6 +14,8 @@ public class BranchController(IBranchRepository repository, BankContext context)
     [HttpGet]
     public IActionResult GetAll()
     {
+        throw new Exception("Test");
+        
         var clientsDto = repository.GetAll()
                 //.IgnoreAutoIncludes()
                 //.Include(b=>b.Workers)

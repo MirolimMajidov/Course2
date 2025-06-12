@@ -14,6 +14,15 @@ using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
+builder.Services.AddLogging(op=>
+{
+    op.AddConsole();
+    //op.AddDebug();
+    //op.AddEventSourceLogger();
+    //op.AddFilter("Microsoft", LogLevel.Warning);
+    //op.AddFilter("System", LogLevel.Warning);
+    //op.AddFilter("Default", LogLevel.Information);
+});
 builder.Services.AddControllers()
     .AddJsonOptions(options => options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles);
 
