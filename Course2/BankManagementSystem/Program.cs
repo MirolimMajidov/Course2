@@ -16,10 +16,13 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddLogging(op=>
 {
-    op.AddConsole();
-    //op.AddDebug();
-    //op.AddEventSourceLogger();
-    //op.AddFilter("Microsoft", LogLevel.Warning);
+    op.AddConsole(ops =>
+    {
+        ops.IncludeScopes = true;
+        ops.TimestampFormat = "yyyy-MM-dd HH:mm:ss ";
+    });
+   
+    op.AddFilter("Microsoft.AspNetCore.*", LogLevel.Warning);
     //op.AddFilter("System", LogLevel.Warning);
     //op.AddFilter("Default", LogLevel.Information);
 });
@@ -122,7 +125,7 @@ using (var scope = app.Services.CreateScope())
     }
 }
 
-if (app.Environment.IsDevelopment())
+if (app.Environment.IsDevelopment() || app.Environment.IsStaging())
 {
     app.MapOpenApi();
     app.UseSwagger();
