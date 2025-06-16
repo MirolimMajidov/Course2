@@ -27,4 +27,8 @@
       <Folder Include="logs\" />
     </ItemGroup>
 
+    <ItemGroup>
+      <ProjectReference Include="..\MyServiceDefaults\MyServiceDefaults.csproj" />
+    </ItemGroup>
+
 </Project>

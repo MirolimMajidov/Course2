@@ -39,6 +39,7 @@ try
         //op.AddFilter("System", LogLevel.Warning);
         //op.AddFilter("Default", LogLevel.Information);
     });
+    builder.AddServiceDefaults();
     builder.Services.AddControllers()
         .AddJsonOptions(options => options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles);
 

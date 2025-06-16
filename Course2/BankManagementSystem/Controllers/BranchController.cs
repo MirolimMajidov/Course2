@@ -8,13 +8,13 @@ namespace BankManagementSystem.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
-public class BranchController(IBranchRepository repository, BankContext context)
+public class BranchController(IBranchRepository repository, BankContext context, ILogger<BranchController> logger)
     : ControllerBase
 {
     [HttpGet]
     public IActionResult GetAll()
     {
-        throw new Exception("Test");
+        //throw new Exception("Test");
         
         var clientsDto = repository.GetAll()
                 //.IgnoreAutoIncludes()
@@ -26,6 +26,8 @@ public class BranchController(IBranchRepository repository, BankContext context)
         //     _ = client.Workers;
         // }
 
+        logger.LogInformation("Fetched {Count} clients", clientsDto.Length);
+        
         return Ok(clientsDto);
     }
 
