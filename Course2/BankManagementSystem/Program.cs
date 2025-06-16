@@ -40,7 +40,10 @@ try
         //op.AddFilter("Default", LogLevel.Information);
     });
     builder.AddServiceDefaults();
-    builder.Services.AddControllers()
+    builder.Services.AddControllers(options =>
+        {
+            options.Filters.Add<ActionAndResultHandler>();
+        })
         .AddJsonOptions(options => options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles);
 
     builder.Services.AddOpenApi();
