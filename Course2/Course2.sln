@@ -14,6 +14,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyServiceDefaults", "MyServ
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EmptyWebApplication", "EmptyWebApplication\EmptyWebApplication.csproj", "{AEDC7DEC-57C7-4160-A80C-468C06AE6E23}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SoftPrinciples", "SoftPrinciples\SoftPrinciples.csproj", "{3E57AE6B-CCFF-4A76-A595-BCA93BB5CBD3}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -44,6 +46,10 @@ Global
 		{AEDC7DEC-57C7-4160-A80C-468C06AE6E23}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AEDC7DEC-57C7-4160-A80C-468C06AE6E23}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AEDC7DEC-57C7-4160-A80C-468C06AE6E23}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3E57AE6B-CCFF-4A76-A595-BCA93BB5CBD3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3E57AE6B-CCFF-4A76-A595-BCA93BB5CBD3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3E57AE6B-CCFF-4A76-A595-BCA93BB5CBD3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3E57AE6B-CCFF-4A76-A595-BCA93BB5CBD3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{15A871C6-A836-4DA7-AC02-AB5259B866D3} = {5CDF5755-8D30-4C7A-AD72-37CC05D61532}
