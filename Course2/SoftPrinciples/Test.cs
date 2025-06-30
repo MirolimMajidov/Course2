@@ -13,7 +13,7 @@ animals.Add(new Cat());
 animals.Add(new Bird());
 animals.Add(new Bird());
 
-var allFlayableAnimals = animals.OfType<ICanFly>(); 
+var allFlyableAnimals = animals.OfType<ICanFly>(); 
 
 var logger1 = new FileLogger();
 var workerService1 = new WorkerService(logger1);
