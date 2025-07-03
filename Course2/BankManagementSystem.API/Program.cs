@@ -1,16 +1,19 @@
 using System.Text.Json.Serialization;
-using BankManagementSystem.API.Extensions;
-using BankManagementSystem.API.Infrastructure.Database;
-using BankManagementSystem.API.Infrastructure.Interceptors;
-using BankManagementSystem.API.Infrastructure.Repositories;
-using BankManagementSystem.API.Mappers;
-using BankManagementSystem.API.Middlewares;
-using BankManagementSystem.API.Models;
-using BankManagementSystem.API.Services;
-using BankManagementSystem.API.Validations;
+using BankManagementSystem.Application.Repositories;
+using BankManagementSystem.Application.Services;
+using BankManagementSystem.Domain.Models;
+using BankManagementSystem.Infrastructure.Database;
+using BankManagementSystem.Infrastructure.Extensions;
+using BankManagementSystem.Infrastructure.Interceptors;
+using BankManagementSystem.Infrastructure.Mappers;
+using BankManagementSystem.Infrastructure.Repositories;
+using BankManagementSystem.Infrastructure.Validations;
+using BankManagementSystem.Presentation.Extensions;
+using BankManagementSystem.Presentation.Middlewares;
 using FluentValidation;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
+using MyServiceDefaults;
 using Serilog;
 using Serilog.Events;
 
@@ -159,7 +162,7 @@ try
 
     app.Run();
 }
-catch (Exception ex)
+catch (Exception ex) when (ex is not HostAbortedException)
 {
     Log.Fatal(ex, "Application terminated unexpectedly");
 }
