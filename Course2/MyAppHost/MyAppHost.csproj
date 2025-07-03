@@ -15,7 +15,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\BankManagementSystem\BankManagementSystem.csproj" />
+      <ProjectReference Include="..\BankManagementSystem.API\BankManagementSystem.API.csproj" />
       <ProjectReference Include="..\EmptyWebApplication\EmptyWebApplication.csproj" />
     </ItemGroup>
 

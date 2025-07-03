@@ -2,7 +2,7 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyFirstApp", "MyFirstApp\MyFirstApp.csproj", "{6BC52A62-5FEB-4906-BC4B-270878283EDB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BankManagementSystem", "BankManagementSystem\BankManagementSystem.csproj", "{3767B8FF-34CA-4C36-975D-14E83F39AF72}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BankManagementSystem.API", "BankManagementSystem.API\BankManagementSystem.API.csproj", "{3767B8FF-34CA-4C36-975D-14E83F39AF72}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CRUDOperationWithElasticSearch", "CRUDOperationWithElasticSearch\CRUDOperationWithElasticSearch.csproj", "{9C69F954-0D3F-45DD-B39F-B098EE647BFC}"
 EndProject
@@ -15,6 +15,16 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EmptyWebApplication", "EmptyWebApplication\EmptyWebApplication.csproj", "{AEDC7DEC-57C7-4160-A80C-468C06AE6E23}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SoftPrinciples", "SoftPrinciples\SoftPrinciples.csproj", "{3E57AE6B-CCFF-4A76-A595-BCA93BB5CBD3}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Bank", "Bank", "{56B3782F-3462-4089-95B8-F3E3E96C8E43}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BankManagementSystem.Domain", "CleanArchitecture\BankManagementSystem.Domain\BankManagementSystem.Domain.csproj", "{E322A964-E642-4438-BE9A-F202C3C846BE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BankManagementSystem.Application", "CleanArchitecture\BankManagementSystem.Application\BankManagementSystem.Application.csproj", "{5D3D9305-AAE9-4575-B413-F45F9C562358}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BankManagementSystem.Presentation", "CleanArchitecture\BankManagementSystem.Presentation\BankManagementSystem.Presentation.csproj", "{195A4B2B-FAA9-434C-AC85-BD980C3C2CEF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BankManagementSystem.Infrastructure", "CleanArchitecture\BankManagementSystem.Infrastructure\BankManagementSystem.Infrastructure.csproj", "{2782A8C7-B980-41F6-BF14-17E003E3C73B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -50,10 +60,31 @@ Global
 		{3E57AE6B-CCFF-4A76-A595-BCA93BB5CBD3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3E57AE6B-CCFF-4A76-A595-BCA93BB5CBD3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3E57AE6B-CCFF-4A76-A595-BCA93BB5CBD3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E322A964-E642-4438-BE9A-F202C3C846BE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E322A964-E642-4438-BE9A-F202C3C846BE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E322A964-E642-4438-BE9A-F202C3C846BE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E322A964-E642-4438-BE9A-F202C3C846BE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5D3D9305-AAE9-4575-B413-F45F9C562358}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5D3D9305-AAE9-4575-B413-F45F9C562358}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5D3D9305-AAE9-4575-B413-F45F9C562358}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5D3D9305-AAE9-4575-B413-F45F9C562358}.Release|Any CPU.Build.0 = Release|Any CPU
+		{195A4B2B-FAA9-434C-AC85-BD980C3C2CEF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{195A4B2B-FAA9-434C-AC85-BD980C3C2CEF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{195A4B2B-FAA9-434C-AC85-BD980C3C2CEF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{195A4B2B-FAA9-434C-AC85-BD980C3C2CEF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2782A8C7-B980-41F6-BF14-17E003E3C73B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2782A8C7-B980-41F6-BF14-17E003E3C73B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2782A8C7-B980-41F6-BF14-17E003E3C73B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2782A8C7-B980-41F6-BF14-17E003E3C73B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{15A871C6-A836-4DA7-AC02-AB5259B866D3} = {5CDF5755-8D30-4C7A-AD72-37CC05D61532}
 		{96392CA6-3015-437B-9870-C093FE7868CD} = {5CDF5755-8D30-4C7A-AD72-37CC05D61532}
 		{AEDC7DEC-57C7-4160-A80C-468C06AE6E23} = {5CDF5755-8D30-4C7A-AD72-37CC05D61532}
+		{3767B8FF-34CA-4C36-975D-14E83F39AF72} = {56B3782F-3462-4089-95B8-F3E3E96C8E43}
+		{E322A964-E642-4438-BE9A-F202C3C846BE} = {56B3782F-3462-4089-95B8-F3E3E96C8E43}
+		{5D3D9305-AAE9-4575-B413-F45F9C562358} = {56B3782F-3462-4089-95B8-F3E3E96C8E43}
+		{195A4B2B-FAA9-434C-AC85-BD980C3C2CEF} = {56B3782F-3462-4089-95B8-F3E3E96C8E43}
+		{2782A8C7-B980-41F6-BF14-17E003E3C73B} = {56B3782F-3462-4089-95B8-F3E3E96C8E43}
 	EndGlobalSection
 EndGlobal
