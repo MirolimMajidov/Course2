@@ -1,4 +1,5 @@
-﻿using SOLID.SRP;
+﻿using SoftPrinciples;
+using SOLID.SRP;
 using SOLID.OCP;
 using SOLID.ISP;
 using SOLID.DIP;
@@ -22,3 +23,11 @@ workerService1.DoWork();
 var logger2 = new DBLogger();
 var workerService2 = new WorkerService(logger2);
 workerService2.DoWork();
+
+var home = new HomeBuilder()
+    .WithDoors(4)
+    .WithWindows(6);
+    
+    
+    
+    
