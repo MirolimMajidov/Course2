@@ -1,4 +1,4 @@
-﻿namespace SOLID.ISP
+﻿namespace SoftPrinciples
 {
     // Bad example
     public interface IAnimalBad

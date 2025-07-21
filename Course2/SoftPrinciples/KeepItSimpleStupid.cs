@@ -1,4 +1,4 @@
-﻿namespace KISS
+﻿namespace SoftPrinciples
 {
     public class KissClass
     {

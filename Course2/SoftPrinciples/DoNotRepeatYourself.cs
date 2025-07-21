@@ -1,4 +1,4 @@
-﻿namespace DRY
+﻿namespace SoftPrinciples
 {
     public static class PriceFormatter
     {

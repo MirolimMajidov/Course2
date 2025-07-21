@@ -1,4 +1,4 @@
-﻿namespace SOLID.DIP
+﻿namespace SoftPrinciples
 {
     // Bad example
     public class WorkerServiceBad

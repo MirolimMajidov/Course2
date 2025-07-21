@@ -1,4 +1,4 @@
-﻿namespace SOLID.LSP
+﻿namespace SoftPrinciples
 {
     // Bad example
     public class BirdBad

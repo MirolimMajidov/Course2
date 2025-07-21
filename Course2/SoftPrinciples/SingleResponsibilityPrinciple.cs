@@ -1,4 +1,4 @@
-﻿namespace SOLID.SRP
+﻿namespace SoftPrinciples
 {
     //Bad example 
     public class UserBad

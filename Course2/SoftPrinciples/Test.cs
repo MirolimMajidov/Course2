@@ -1,8 +1,5 @@
 ﻿using SoftPrinciples;
-using SOLID.SRP;
-using SOLID.OCP;
-using SOLID.ISP;
-using SOLID.DIP;
+using SoftPrinciples.Patterns;
 
 var user = new User() { Name = "Ali", EmailAddress = "Ali@ali.com" };
 var emailService = new EmailService();

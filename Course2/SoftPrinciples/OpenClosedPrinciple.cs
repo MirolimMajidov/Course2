@@ -1,6 +1,4 @@
-﻿using SOLID.SRP;
-
-namespace SOLID.OCP
+﻿namespace SoftPrinciples
 {
     // Bad example
     public class CircleBad

@@ -1,4 +1,4 @@
-﻿namespace YAGNI
+﻿namespace SoftPrinciples
 {
     public class Task
     {

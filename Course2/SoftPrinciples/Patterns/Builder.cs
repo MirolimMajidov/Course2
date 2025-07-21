@@ -1,4 +1,4 @@
-namespace SoftPrinciples;
+namespace SoftPrinciples.Patterns;
 
 public class Home
 {
