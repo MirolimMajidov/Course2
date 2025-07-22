@@ -4,29 +4,7 @@ using OrderService.Messaging;
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddRabbitMqEventBus(builder.Configuration,
-    assemblies: [typeof(Program).Assembly],
-    defaultOptions: options =>
-    {
-        options.HostName = "localhost";
-        options.UserName = "admin";
-        options.Password = "admin123";
-        options.ExchangeName = "OrderExchange";
-        options.QueueName = "OrderExchange";
-        options.HostPort = 5672;
-        options.UseInbox = false;
-    },
-    eventSubscriberManagerOptions: subscribers =>
-    {
-        subscribers.AddSubscriber<UserCreated, UserCreatedHandler>(options: options=>
-        {
-            options.QueueName = "UserQueue";
-        });
-       
-        // subscribers.AddSubscriber<UserDeleted, UserDeletedHandler>(options: options=>
-        // {
-        //     options.QueueName = "UserQueue";
-        // });
-    }
+    assemblies: [typeof(Program).Assembly]
 );
 builder.Services.AddControllers();
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
