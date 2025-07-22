@@ -2,9 +2,6 @@ using EventBus.RabbitMQ.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
-builder.Services.AddRabbitMqEventBus(builder.Configuration, assemblies: [typeof(Program).Assembly]);
-
 builder.Services.AddRabbitMqEventBus(builder.Configuration,
     assemblies: [typeof(Program).Assembly],
     defaultOptions: options =>
@@ -12,15 +9,10 @@ builder.Services.AddRabbitMqEventBus(builder.Configuration,
         options.HostName = "localhost";
         options.UserName = "admin";
         options.Password = "admin123";
+        options.ExchangeName = "UsersExchange";
         options.HostPort = 5672;
         options.UseInbox = false;
     }
-    // eventStoreOptions: options =>
-    // {
-    //     options.Inbox.IsEnabled = false;
-    //     options.Outbox.IsEnabled = false;
-    // }
-    //
 );
 builder.Services.AddControllers();
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
