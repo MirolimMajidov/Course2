@@ -1,4 +1,5 @@
 using BankManagementSystem.Application.Repositories;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
@@ -30,6 +31,7 @@ public class BranchController(IBranchRepository repository, ILogger<BranchContro
     }
 
     [HttpGet("{id:guid}")]
+    [Authorize]
     public IActionResult GetById(Guid id)
     {
         var client = repository.GetById(id);

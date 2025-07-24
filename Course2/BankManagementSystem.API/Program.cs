@@ -1,4 +1,5 @@
 using System.Text.Json.Serialization;
+using BankManagementSystem.Application.Auth;
 using BankManagementSystem.Application.Repositories;
 using BankManagementSystem.Application.Services;
 using BankManagementSystem.Domain.Models;
@@ -29,6 +30,7 @@ try
 
     var builder = WebApplication.CreateBuilder(args);
     builder.Services.AddSerilog();
+    builder.Services.AddMyAuth();
 
     builder.Services.AddLogging(op =>
     {
@@ -73,6 +75,25 @@ try
     builder.Services.AddSwaggerGen(c =>
     {
         c.SwaggerDoc("v1", new OpenApiInfo { Title = "Bank application APIs", Version = "v1" });
+
+        // Add the JWT Bearer authentication scheme
+        var securityScheme = new OpenApiSecurityScheme
+        {
+            Name = "Authorization",
+            Description = "JWT Authorization header using the Bearer scheme.",
+            Type = SecuritySchemeType.Http,
+            Scheme = "bearer",
+            BearerFormat = "JWT",
+            In = ParameterLocation.Header,
+            Reference = new OpenApiReference { Type = ReferenceType.SecurityScheme, Id = "Bearer" }
+        };
+        c.AddSecurityDefinition("Bearer", securityScheme);
+
+        // Use the JWT Bearer authentication scheme globally
+        c.AddSecurityRequirement(new OpenApiSecurityRequirement
+        {
+            { securityScheme, new List<string>() }
+        });
     });
     builder.Services.AddAutoMapper(op => { op.AddMaps(typeof(ClientProfile).Assembly); });
     builder.Services.AddMapster();
@@ -155,6 +176,7 @@ try
 
     app.UseMiddleware<GlobalExceptionMiddleware>();
     app.UseHttpsRedirection();
+    app.UseAuthentication();
     app.UseAuthorization();
 
     app.MapAllMinimalAPIs();
