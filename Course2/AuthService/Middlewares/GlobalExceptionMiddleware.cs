@@ -1,11 +1,9 @@
 using System.Net;
-using BankManagementSystem.Application.Exceptions;
-using Microsoft.AspNetCore.Http;
-using Microsoft.Extensions.Logging;
+using AuthService.Exceptions;
 
-namespace BankManagementSystem.Presentation.Middlewares;
+namespace AuthService.Middlewares;
 
-public class GlobalExceptionMiddleware(RequestDelegate next, ILogger<GlobalExceptionMiddleware> logger)
+public class GlobalExceptionMiddleware(RequestDelegate next)
 {
     public async Task InvokeAsync(HttpContext httpContext)
     {
@@ -24,7 +22,7 @@ public class GlobalExceptionMiddleware(RequestDelegate next, ILogger<GlobalExcep
         {
             httpContext.Response.ContentType = "application/json";
             httpContext.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
-            object messageInfo = null;
+            object messageInfo;
 #if DEBUG
             messageInfo = new
             {
@@ -38,8 +36,6 @@ public class GlobalExceptionMiddleware(RequestDelegate next, ILogger<GlobalExcep
                     stackTrace = ""
                 };
 #endif
-            
-            logger.LogError("An error occurred: {Message}", ex.Message);
             
             await httpContext.Response.WriteAsJsonAsync<dynamic>(messageInfo);
         }

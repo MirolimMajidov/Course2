@@ -1,5 +1,6 @@
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
+using AuthService.Exceptions;
 using AuthService.Models;
 using Microsoft.IdentityModel.Tokens;
 
@@ -30,7 +31,7 @@ public class AuthService
     async Task<TokenInfo> GeneratedJWT(User user)
     {
         if (user is null)
-            throw new ArgumentException("Invalid username or password.");
+            throw new BadRequestException("Invalid username or password.");
 
         var userRoles = new string[] { user.Role ?? "User" };
 
@@ -43,7 +44,7 @@ public class AuthService
         foreach (var userRole in userRoles)
             claims.Add(new Claim(ClaimTypes.Role, userRole));
 
-        var expireTime = DateTime.UtcNow.Add(TimeSpan.FromMinutes(AuthOptions.LIFETIME));
+        var expireTime = DateTime.Now.Add(TimeSpan.FromMinutes(AuthOptions.LIFETIME));
         var jwt = new JwtSecurityToken(
             issuer: AuthOptions.ISSUER,
             audience: AuthOptions.AUDIENCE,
