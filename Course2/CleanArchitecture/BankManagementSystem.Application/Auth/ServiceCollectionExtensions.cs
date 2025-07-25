@@ -13,13 +13,17 @@ public static class ServiceCollectionExtensions
     {
         service.AddAuthorization(options =>
         {
-            // options.AddPolicy("AdminOnly", 
-            //     policy =>
-            //     {
-            //         policy.RequireRole("admin");
-            //         policy.RequireRole("editor");
-            //     });
-            // options.AddPolicy("UserOnly", policy => policy.RequireRole("User"));
+            options.AddPolicy("AdminOnly", 
+                policy =>
+                {
+                    policy.RequireRole("Admin");
+                    policy.RequireRole("Editor");
+                });
+            options.AddPolicy("UserOnly", policy =>
+            {
+                policy.RequireRole("User");
+                policy.RequireRole("ProUser");
+            });
         });
         service.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
             .AddJwtBearer(options =>
