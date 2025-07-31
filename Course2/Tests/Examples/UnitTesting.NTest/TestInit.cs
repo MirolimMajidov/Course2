@@ -1,15 +1,17 @@
-﻿namespace UnitTesting.NTest;
+﻿using NUnit.Framework;
+
+namespace UnitTesting.NTest;
 
 
 public class TestInit
 {
-    //[AssemblyInitialize]
-    //public static void AssemblyInitialize(TestContext testContext)
-    //{
-    //}
+    [OneTimeSetUp]
+    public static void AssemblyInitialize(TestContext testContext)
+    {
+    }
 
-    //[AssemblyCleanup]
-    //public static void AssemblyCleanup()
-    //{
-    //}
+    [OneTimeTearDown]
+    public static void AssemblyCleanup()
+    {
+    }
 }

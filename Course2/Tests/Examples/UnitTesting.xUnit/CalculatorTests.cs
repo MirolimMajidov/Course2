@@ -2,14 +2,27 @@ using CalculatorApp;
 using FluentAssertions;
 using Moq;
 using Xunit;
+using Xunit.Abstractions;
 
 namespace UnitTesting.xUnit
 {
     public class CalculatorTests
     {
-        [Fact]
-        public void CalculatorAdd_FirstValue4AndSecondValue11_ThatShouldBeEqultTo15()
+        private readonly ITestOutputHelper _testOutputHelper;
+        public DateTime Time;
+
+        public CalculatorTests(ITestOutputHelper testOutputHelper)
         {
+            _testOutputHelper = testOutputHelper;
+            Time = DateTime.Now;
+        }
+        
+        [Fact]
+        public void CalculatorAdd_FirstValue4AndSecondValue11_ThatShouldBeEqualTo15()
+        {
+            // _testOutputHelper.WriteLine(Time.ToString());
+            // Thread.Sleep(1000);
+            
             // Arrange/Given
             var calculator = new Calculator();
 
@@ -21,8 +34,11 @@ namespace UnitTesting.xUnit
         }
 
         [Fact]
-        public void CalculatorAdd_FirstValue5AndSecondValue6_ThatShouldNotBeEqultTo15()
+        public void CalculatorAdd_FirstValue5AndSecondValue6_ThatShouldNotBeEqualTo15()
         {
+            // _testOutputHelper.WriteLine(Time.ToString());
+            // Thread.Sleep(1000);
+            
             // Arrange/Given
             var calculator = new Calculator();
 

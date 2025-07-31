@@ -2,6 +2,7 @@ using FluentAssertions;
 using Moq;
 using NUnit.Framework;
 using System;
+using Microsoft.VisualStudio.TestPlatform.Common.Exceptions;
 
 namespace UnitTesting.NUnit
 {

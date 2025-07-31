@@ -8,16 +8,24 @@ namespace UnitTesting.MSTest;
 [TestClass]
 public class CalculatorTests : BaseTestInit
 {
+    private Calculator _calculator;
+
+    [TestInitialize]
+    public void TestInitialize()
+    {
+        _calculator = new Calculator();
+    }
+
     #region Add tests
 
     [TestMethod]
     public void Add_FirstValue4AndSecondValue11_ThatShouldBeEqualTo15()
     {
         // Arrange/Given
-        var calculator = new Calculator();
+        // var calculator = new Calculator();
 
         // Act/When
-        var result = calculator.Add(4, 11);
+        var result = _calculator.Add(4, 11);
 
         // Assert/Then
         Assert.AreEqual(15, result);
@@ -59,7 +67,7 @@ public class CalculatorTests : BaseTestInit
     #endregion
 
     #region Subtract tests
-    
+
     [DataTestMethod]
     [DataRow(5, 3, 2)]
     [DataRow(-1, -1, 0)]
@@ -77,7 +85,7 @@ public class CalculatorTests : BaseTestInit
         Assert.AreEqual(expected, result);
         result.Should().Be(expected);
     }
-    
+
     #endregion
 
     [DataTestMethod]

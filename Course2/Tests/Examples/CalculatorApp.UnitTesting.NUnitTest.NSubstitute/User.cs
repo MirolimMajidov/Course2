@@ -8,7 +8,19 @@ namespace CalculatorApp.UnitTesting.NUnitTest.NSubstitute
 {
     public class User
     {
-        public virtual string FirstName { get; set; }
+        private string _firstName;
+
+        public virtual string FirstName
+        {
+            get
+            {
+                return _firstName ?? string.Empty;
+            }
+            set
+            {
+                _firstName = value;
+            }
+        }
 
         public virtual string LastName { get; set; }
 

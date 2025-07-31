@@ -15,15 +15,9 @@ public abstract class BaseTestInit
     public static void ClassInitialize(TestContext testContext)
     {
     }
-
-
-    [TestInitialize]
-    public virtual void TestInitialize()
-    {
-    }
-
+    
     [TestCleanup]
-    public void TestCleanup()
+    public virtual void TestCleanup()
     {
     }
 
