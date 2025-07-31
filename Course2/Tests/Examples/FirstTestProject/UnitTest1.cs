@@ -1,10 +1,18 @@
 namespace FirstTestProject;
 
+#if DEBUG
 public class Tests
 {
     [SetUp]
     public void Setup()
     {
+        Console.WriteLine("Setup");
+    }
+    
+    [TearDown]
+    public void TearDown()
+    {
+        Console.WriteLine("TearDown");
     }
 
     [Test]
@@ -25,3 +33,4 @@ public class Tests
         Assert.That(sum, Is.EqualTo(10), "Both should be same");
     }
 }
+#endif
