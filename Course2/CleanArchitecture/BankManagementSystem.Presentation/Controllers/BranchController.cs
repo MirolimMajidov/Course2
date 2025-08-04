@@ -31,7 +31,7 @@ public class BranchController(IBranchRepository repository, ILogger<BranchContro
     }
 
     [HttpGet("{id:guid}")]
-    [Authorize]
+    //[Authorize]
     public IActionResult GetById(Guid id)
     {
         var client = repository.GetById(id);
