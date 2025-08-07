@@ -104,7 +104,15 @@ try
     using (var scope = app.Services.CreateScope())
     {
         var dbContext = scope.ServiceProvider.GetRequiredService<BankContext>();
-        dbContext.Database.Migrate();
+        if (app.Environment.IsEnvironment("Test"))
+        {
+            dbContext.Database.EnsureCreated();
+        }
+        else
+        {
+            dbContext.Database.Migrate();
+        }
+        
         if (!dbContext.Clients.Any())
         {
             var branch = new Branch

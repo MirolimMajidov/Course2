@@ -15,10 +15,10 @@ public abstract class BaseTestEntity
         return client;
     }
     
-    public HttpClient CreateHttpClientWithAuthentication()
+    public HttpClient CreateHttpClientWithToken()
     {
         var client = Server.CreateClient();
-        var token = GetUserToken().GetAwaiter().GetResult();
+        var token = GetUserToken(client).GetAwaiter().GetResult();
         client.DefaultRequestHeaders.Add(nameof(HttpRequestHeader.Authorization),
             $"{JwtBearerDefaults.AuthenticationScheme} {token.AccessToken}");
         //client.DefaultRequestHeaders.Add(HttpRequestHeaderNames.ApiKey, ApiKeyAuthenticationHandler.DefaultApiKeyValue);
@@ -26,15 +26,14 @@ public abstract class BaseTestEntity
         return client;
     }
 
-    private async Task<TokenInfo> GetUserToken()
+    private async Task<TokenInfo> GetUserToken(HttpClient client)
     {
-        var client = Server.CreateClient();
         var login = new LoginInfo
         {
             Username = "testuser",
             Password = "testpassword"
         };
-        var response = await client.PostAsJsonAsync("api/auth", login);
+        var response = await client.PostAsJsonAsync("api/auth/token", login);
         response.EnsureSuccessStatusCode();
         var token = await response.Content.ReadFromJsonAsync<TokenInfo>();
 
