@@ -22,7 +22,7 @@ try
 {
     var logFolder = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "logs");
     Log.Logger = new LoggerConfiguration()
-        .WriteTo.Console()
+        .WriteTo.Console(restrictedToMinimumLevel: LogEventLevel.Error)
         .WriteTo.File($"{logFolder}/MyLogs.txt", rollingInterval: RollingInterval.Day)
         .WriteTo.File($"{logFolder}/MyErrorLogs.txt", restrictedToMinimumLevel: LogEventLevel.Error,
             rollingInterval: RollingInterval.Day)

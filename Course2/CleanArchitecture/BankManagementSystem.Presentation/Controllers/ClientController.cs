@@ -6,13 +6,13 @@ using Microsoft.AspNetCore.Mvc;
 namespace BankManagementSystem.Presentation.Controllers;
 
 [ApiController]
-[Authorize]
+// [Authorize]
 [Route("api/[controller]")]
 public class ClientController(IClientService service)
     : ControllerBase
 {
     [HttpGet]
-    [AllowAnonymous]
+    // [AllowAnonymous]
     public IActionResult GetAll()
     {
         var clientsDto = service.GetAll();
@@ -20,7 +20,7 @@ public class ClientController(IClientService service)
     }
 
     [HttpGet("{id:guid}")]
-    [Authorize(Roles = "Admin")]
+    // [Authorize(Roles = "Admin")]
     public IActionResult GetById(Guid id)
     {
         var client = service.GetById(id);
@@ -31,7 +31,7 @@ public class ClientController(IClientService service)
     }
 
     [HttpPost]
-    [Authorize(Roles = "User")]
+    // [Authorize(Roles = "User")]
     public IActionResult Create(CreateClient createClient)
     {
         var (validationResult, createdClient) = service.Add(createClient);
@@ -45,7 +45,7 @@ public class ClientController(IClientService service)
     }
 
     [HttpPut]
-    [Authorize(Policy = "AdminOnly")]
+    // [Authorize(Policy = "AdminOnly")]
     public IActionResult Update(Guid id, UpdateClient updateClient)
     {
         var result = service.TryUpdate(id, updateClient);
