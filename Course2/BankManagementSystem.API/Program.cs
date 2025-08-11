@@ -45,29 +45,32 @@ try
         //op.AddFilter("Default", LogLevel.Information);
     });
     builder.AddServiceDefaults();
-    builder.Services.AddControllers(options =>
-        {
-            options.Filters.Add<ActionAndResultHandler>();
-        })
+    builder.Services.AddControllers(options => { options.Filters.Add<ActionAndResultHandler>(); })
         .AddJsonOptions(options => options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles);
 
     builder.Services.AddOpenApi();
     builder.Services.AddSingleton<AvoidDeletingPersonInterceptor>();
 
     var databaseConnectionString = builder.Configuration.GetConnectionString("DefaultConnection");
-    builder.Services.AddDbContext<BankContext>((sp, options) =>
-    {
-        options.UseSqlServer(databaseConnectionString)
-            //.LogTo(Console.WriteLine, LogLevel.Information)
-            //.UseLazyLoadingProxies()
-            .AddInterceptors(sp.GetRequiredService<AvoidDeletingPersonInterceptor>())
-            ;
-    });
+    // if (builder.Environment.IsEnvironment("Test"))
+    // {
+    //     builder.Services.AddDbContext<BankContext>(options => { options.UseInMemoryDatabase("InMemoryBankTest"); });
+    // }
+    // else
+    // {
+        builder.Services.AddDbContext<BankContext>((sp, options) =>
+        {
+            options.UseSqlServer(databaseConnectionString)
+                //.LogTo(Console.WriteLine, LogLevel.Information)
+                //.UseLazyLoadingProxies()
+                .AddInterceptors(sp.GetRequiredService<AvoidDeletingPersonInterceptor>())
+                ;
+        });
+    // }
 
     builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
     builder.Services.AddScoped<IClientRepository, ClientRepository>();
     builder.Services.AddScoped<IWorkerRepository, WorkerRepository>();
-    ;
     builder.Services.AddScoped<IBranchRepository, BranchRepository>();
 
     builder.Services.AddScoped<IClientService, ClientService>();
@@ -104,15 +107,15 @@ try
     using (var scope = app.Services.CreateScope())
     {
         var dbContext = scope.ServiceProvider.GetRequiredService<BankContext>();
-        if (app.Environment.IsEnvironment("Test"))
-        {
-            dbContext.Database.EnsureCreated();
-        }
-        else
-        {
-            dbContext.Database.Migrate();
-        }
-        
+        // if (app.Environment.IsEnvironment("Test"))
+        // {
+        //     dbContext.Database.EnsureCreated();
+        // }
+        // else
+        // {
+        dbContext.Database.Migrate();
+        // }
+
         if (!dbContext.Clients.Any())
         {
             var branch = new Branch
