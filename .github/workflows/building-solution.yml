@@ -22,10 +22,10 @@ jobs:
         dotnet-version: 9.0.x
         
     - name: Restore dependencies
-      run: dotnet restore Course2.sln
+      run: dotnet restore Course2/Course2.sln
 
     - name: Building solution
-      run: dotnet build Course2.sln --no-restore
+      run: dotnet build Course2/Course2.sln --no-restore
 
     - name: Test
       run: dotnet test --no-build --verbosity normal
