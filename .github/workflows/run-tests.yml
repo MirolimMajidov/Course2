@@ -37,10 +37,10 @@ jobs:
       - name: Restore dependencies
         run: dotnet restore Course2/Course2.sln
 
-      - name: Run unit and functionality tests
-        run: dotnet test 'Tests/Examples/UnitTesting.NTest/CalculatorApp.UnitTesting.NUnitTest.csproj' --logger "console;verbosity=detailed" --blame
+      - name: Run unit tests
+        run: dotnet test 'Course2/Tests/Examples/UnitTesting.NTest/CalculatorApp.UnitTesting.NUnitTest.csproj' --logger "console;verbosity=detailed" --blame
 
       - name: Run integration tests
         env:
           ConnectionStrings__DefaultConnection: "Server=localhost,1433;Database=Test_DB;User Id=sa;Password=MyS3cureP@ss!;TrustServerCertificate=True;"
-        run: dotnet test 'Tests/BankManagementSystem.xUNit.IntegrationTests/BankManagementSystem.xUNit.IntegrationTests.csproj' --logger "console;verbosity=detailed" --blame
+        run: dotnet test 'Course2/Tests/BankManagementSystem.xUNit.IntegrationTests/BankManagementSystem.xUNit.IntegrationTests.csproj' --logger "console;verbosity=detailed" --blame
