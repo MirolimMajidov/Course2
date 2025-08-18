@@ -72,6 +72,13 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "GitHubActions", "GitHubActi
 		..\.github\workflows\run-tests.yml = ..\.github\workflows\run-tests.yml
 	EndProjectSection
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SharedActions", "SharedActions", "{C6D591C0-918B-453C-8641-FF0C61F1DFF1}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Versioning", "Versioning", "{C6E7E573-35DB-47E7-A61A-2DB0A2037417}"
+	ProjectSection(SolutionItems) = preProject
+		..\.github\workflows\release-bank-service.yml = ..\.github\workflows\release-bank-service.yml
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -202,5 +209,7 @@ Global
 		{3337CDCB-04DF-434B-9DBB-01449E2521DF} = {5E39B9E3-4935-4A3D-8BB1-D994ACF4D578}
 		{653AF5AC-DCC2-48AE-969A-9EF1F3B4A03B} = {DA769807-5CA7-4198-BB64-7CCB5202B26F}
 		{4A5A8404-05A6-4297-8E7C-AC03C8B4ABEA} = {A123B2A6-911F-47A5-8BD3-76ADA349EE00}
+		{C6D591C0-918B-453C-8641-FF0C61F1DFF1} = {4A5A8404-05A6-4297-8E7C-AC03C8B4ABEA}
+		{C6E7E573-35DB-47E7-A61A-2DB0A2037417} = {4A5A8404-05A6-4297-8E7C-AC03C8B4ABEA}
 	EndGlobalSection
 EndGlobal
