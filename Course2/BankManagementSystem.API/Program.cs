@@ -58,14 +58,14 @@ try
     // }
     // else
     // {
-        builder.Services.AddDbContext<BankContext>((sp, options) =>
-        {
-            options.UseSqlServer(databaseConnectionString)
-                //.LogTo(Console.WriteLine, LogLevel.Information)
-                //.UseLazyLoadingProxies()
-                .AddInterceptors(sp.GetRequiredService<AvoidDeletingPersonInterceptor>())
-                ;
-        });
+    builder.Services.AddDbContext<BankContext>((sp, options) =>
+    {
+        options.UseSqlServer(databaseConnectionString)
+            //.LogTo(Console.WriteLine, LogLevel.Information)
+            //.UseLazyLoadingProxies()
+            .AddInterceptors(sp.GetRequiredService<AvoidDeletingPersonInterceptor>())
+            ;
+    });
     // }
 
     builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
@@ -118,12 +118,16 @@ try
 
         if (!dbContext.Clients.Any())
         {
+            var localTime = DateTime.SpecifyKind(DateTime.Now, DateTimeKind.Unspecified);
+            var offset = TimeZoneInfo.Local.GetUtcOffset(localTime);
+            var dto = new DateTimeOffset(localTime, offset);
+
             var branch = new Branch
             {
                 Id = Guid.NewGuid(),
                 FullName = "Main Branch",
                 Address = "Khujand",
-                CreatedOn = new DateTimeOffset(DateTime.Now, TimeSpan.FromHours(5))
+                CreatedOn = dto
             };
             var branch2 = new Branch
             {
