@@ -15,7 +15,7 @@ jobs:
       sqlserver:
         image: mcr.microsoft.com/mssql/server:2022-latest
         env:
-          SA_PASSWORD: '12345678!'
+          SA_PASSWORD: 'MyS3cureP@ss!'
           ACCEPT_EULA: "Y"
         options: >-
           --health-cmd "exit 0"
@@ -42,5 +42,5 @@ jobs:
 
       - name: Run integration tests
         env:
-          ConnectionStrings__DefaultConnection: "Server=localhost,1433;Database=${{ inputs.database_name }};User Id=sa;Password=12345678!;TrustServerCertificate=True;"
+          ConnectionStrings__DefaultConnection: "Server=localhost,1433;Database=Test_DB;User Id=sa;Password=MyS3cureP@ss!;TrustServerCertificate=True;"
         run: dotnet test 'Tests/BankManagementSystem.xUNit.IntegrationTests/BankManagementSystem.xUNit.IntegrationTests.csproj' --logger "console;verbosity=detailed" --blame
