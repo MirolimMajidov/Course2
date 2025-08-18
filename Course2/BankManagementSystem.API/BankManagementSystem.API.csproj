@@ -12,4 +12,4 @@
       <ProjectReference Include="..\CleanArchitecture\BankManagementSystem.Presentation\BankManagementSystem.Presentation.csproj" />
     </ItemGroup>
 
-<PropertyGroup><Version>..1</Version></PropertyGroup></Project>
+<PropertyGroup><Version>..2</Version></PropertyGroup></Project>
