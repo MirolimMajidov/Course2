@@ -1,25 +1,20 @@
-
-
-using CalculatorApp;
+using System;
 using FluentAssertions;
 using NUnit.Framework;
-using System;
+using UnitTesting.NTest;
 
-namespace UnitTesting.NTest
+namespace CalculatorApp.UnitTesting.NUnitTest
 {
     public class CalculatorTests: BaseTestInit
     {
-        public DateTime Time;
-
-        public CalculatorTests()
-        {
-            Time = DateTime.Now;
-        }
+        private readonly DateTime _time = DateTime.Now;
 
         [SetUp]
-        public void TestCleanup()
+        public override void TestInitialize()
         {
-            Console.WriteLine(Time);
+            base.TestInitialize();
+            
+            Console.WriteLine(_time);
         }
 
         [Test]
@@ -32,7 +27,7 @@ namespace UnitTesting.NTest
             var result = calculator.Add(4, 11);
 
             // Assert/Then
-            Assert.AreEqual(15, result);
+            Assert.That(result, Is.EqualTo(15));
             result.Should().Be(15);
         }
 
@@ -46,7 +41,7 @@ namespace UnitTesting.NTest
             var result = calculator.Add(5, 6);
 
             // Assert
-            Assert.AreEqual(11, result);
+            Assert.That(result, Is.EqualTo(11));
             result.Should().NotBe(15);
         }
 
@@ -64,7 +59,7 @@ namespace UnitTesting.NTest
             int result = calculator.Add(a, b);
 
             // Assert/Then
-            Assert.AreEqual(expected, result);
+            Assert.That(result, Is.EqualTo(expected));
             result.Should().Be(expected);
         }
 
@@ -82,7 +77,7 @@ namespace UnitTesting.NTest
             int result = calculator.Subtract(a, b);
 
             // Assert
-            Assert.AreEqual(expected, result);
+            Assert.That(result, Is.EqualTo(expected));
             result.Should().Be(expected);
         }
 
@@ -100,7 +95,7 @@ namespace UnitTesting.NTest
             int result = calculator.Multiply(a, b);
 
             // Assert
-            Assert.AreEqual(expected, result);
+            Assert.That(result, Is.EqualTo(expected));
             result.Should().Be(expected);
         }
 
@@ -118,7 +113,7 @@ namespace UnitTesting.NTest
             double result = calculator.Divide(a, b);
 
             // Assert
-            Assert.AreEqual(expected, result);
+            Assert.That(result, Is.EqualTo(expected));
             result.Should().BeApproximately(expected, 0.001);
         }
 

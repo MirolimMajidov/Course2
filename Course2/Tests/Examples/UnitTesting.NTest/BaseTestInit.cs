@@ -12,7 +12,7 @@ public abstract class BaseTestInit
 
 
     [SetUp]
-    public void TestInitialize()
+    public virtual void TestInitialize()
     {
     }
 
