@@ -44,7 +44,7 @@ jobs:
           DOCKER_BUILD_SUMMARY: true
         with:
           context: .
-          file: Course2/BankManagementSystem.API/Dockerfile
+          file: BankManagementSystem.API/Dockerfile
           push: true
           tags: |
             mirolimmajidov/itrun.cbs:latest
