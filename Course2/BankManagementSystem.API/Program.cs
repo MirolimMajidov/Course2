@@ -184,12 +184,12 @@ try
         }
     }
 
-    if (app.Environment.IsDevelopment() || app.Environment.IsStaging())
-    {
+    // if (app.Environment.IsDevelopment() || app.Environment.IsStaging())
+    // {
         app.MapOpenApi();
         app.UseSwagger();
         app.UseSwaggerUI(options => { options.EnableTryItOutByDefault(); });
-    }
+    // }
 
     app.UseMiddleware<GlobalExceptionMiddleware>();
     app.UseHttpsRedirection();
