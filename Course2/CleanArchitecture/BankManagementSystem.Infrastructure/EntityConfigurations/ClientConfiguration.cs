@@ -13,5 +13,14 @@ public class ClientConfiguration : IEntityTypeConfiguration<Client>
 
         entityBuilder.Property(p => p.Password).IsRequired(false);
         entityBuilder.Property(p => p.Email).IsRequired(false);
+
+        Client[] entities =
+        [
+            new Client
+            {
+
+            }
+        ];
+        // entityBuilder.HasData(entities);
     }
 }
