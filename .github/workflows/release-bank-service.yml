@@ -14,14 +14,41 @@ jobs:
       project_file_path: "Course2/BankManagementSystem.API/BankManagementSystem.API.csproj"
       should_add_version_tag: ${{ github.ref == 'refs/heads/main' }}
    
-#  Release:
-#    needs: Versioning
-#    uses: ./.github/workflows/build-and-push-nuget-package.yml
-#    with:
-#      project_file_path: 'src/EventStorage/EventStorage.csproj'
-#      version: ${{ needs.Versioning.outputs.version }}
-#      package_name: 'Mirolim.EventStorage'
-#      application_name: 'EventStorage'
-#    secrets:
-#      nuget_org_api_key: ${{ secrets.EVENT_STORAGE_NUGET_ORG_API_KEY }}
-#      github_nuget_source_secret: ${{ secrets.NUGET_SOURCE_SECRET }}
+  Release:
+    needs: Versioning
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 9.0.x
+
+      - name: Restore dependencies
+        run: dotnet restore Course2/Course2.sln
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Login to DockerHub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKERHUB_USER }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+          
+      - name: Build, tags, and push images to DockerHub
+        uses: docker/build-push-action@v6
+        env:
+          DOCKER_BUILD_SUMMARY: false
+        with:
+          context: .
+          file: Course2/BankManagementSystem.API/Dockerfile
+          push: true
+          tags: |
+            mirolimmajidov/itrun.cbs:latest
+            mirolimmajidov/itrun.cbs:${{ needs.Versioning.outputs.version }}
+
+#      - name: Build the Docker image
+#        run: docker build . --file Dockerfile --tag my-image-name:$(date +%s)

@@ -73,6 +73,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "GitHubActions", "GitHubActi
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SharedActions", "SharedActions", "{C6D591C0-918B-453C-8641-FF0C61F1DFF1}"
+	ProjectSection(SolutionItems) = preProject
+		..\.github\workflows\service-versioning.yml = ..\.github\workflows\service-versioning.yml
+	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Versioning", "Versioning", "{C6E7E573-35DB-47E7-A61A-2DB0A2037417}"
 	ProjectSection(SolutionItems) = preProject

@@ -4,6 +4,7 @@
         <TargetFramework>net9.0</TargetFramework>
         <ImplicitUsings>enable</ImplicitUsings>
         <Version>1.0.2</Version>
+        <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
     </PropertyGroup>
 
     <ItemGroup>
@@ -11,6 +12,12 @@
       <ProjectReference Include="..\CleanArchitecture\BankManagementSystem.Domain\BankManagementSystem.Domain.csproj" />
       <ProjectReference Include="..\CleanArchitecture\BankManagementSystem.Infrastructure\BankManagementSystem.Infrastructure.csproj" />
       <ProjectReference Include="..\CleanArchitecture\BankManagementSystem.Presentation\BankManagementSystem.Presentation.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Content Include="..\.dockerignore">
+        <Link>.dockerignore</Link>
+      </Content>
     </ItemGroup>
 
 <PropertyGroup><Version>1.0.2</Version></PropertyGroup></Project>
