@@ -43,12 +43,9 @@ jobs:
         env:
           DOCKER_BUILD_SUMMARY: false
         with:
-          context: .
+#          context: .
           file: Course2/BankManagementSystem.API/Dockerfile
           push: true
           tags: |
             mirolimmajidov/itrun.cbs:latest
             mirolimmajidov/itrun.cbs:${{ needs.Versioning.outputs.version }}
-
-#      - name: Build the Docker image
-#        run: docker build . --file Dockerfile --tag my-image-name:$(date +%s)
