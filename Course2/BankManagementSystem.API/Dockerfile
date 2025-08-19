@@ -13,7 +13,7 @@ COPY ["Course2/MyServiceDefaults/MyServiceDefaults.csproj", "MyServiceDefaults/"
 COPY ["Course2/CleanArchitecture/BankManagementSystem.Domain/BankManagementSystem.Domain.csproj", "CleanArchitecture/BankManagementSystem.Domain/"]
 COPY ["Course2/CleanArchitecture/BankManagementSystem.Infrastructure/BankManagementSystem.Infrastructure.csproj", "CleanArchitecture/BankManagementSystem.Infrastructure/"]
 COPY ["Course2/CleanArchitecture/BankManagementSystem.Presentation/BankManagementSystem.Presentation.csproj", "CleanArchitecture/BankManagementSystem.Presentation/"]
-RUN dotnet restore "Course2/BankManagementSystem.API/BankManagementSystem.API.csproj"
+RUN dotnet restore "BankManagementSystem.API/BankManagementSystem.API.csproj"
 COPY . .
 WORKDIR "/src/BankManagementSystem.API"
 RUN dotnet build "BankManagementSystem.API.csproj" -c $BUILD_CONFIGURATION -o /app/build
