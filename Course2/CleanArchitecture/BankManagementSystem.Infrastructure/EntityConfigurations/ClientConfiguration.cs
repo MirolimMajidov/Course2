@@ -10,5 +10,8 @@ public class ClientConfiguration : IEntityTypeConfiguration<Client>
     {
         entityBuilder.HasIndex(p => p.UserName)
             .IsUnique();
+
+        entityBuilder.Property(p => p.Password).IsRequired(false);
+        entityBuilder.Property(p => p.Email).IsRequired(false);
     }
 }

@@ -60,7 +60,8 @@ try
     // {
     builder.Services.AddDbContext<BankContext>((sp, options) =>
     {
-        options.UseSqlServer(databaseConnectionString)
+        options.UseInMemoryDatabase("InMemoryBankTest")
+        //options.UseSqlServer(databaseConnectionString)
             //.LogTo(Console.WriteLine, LogLevel.Information)
             //.UseLazyLoadingProxies()
             .AddInterceptors(sp.GetRequiredService<AvoidDeletingPersonInterceptor>())
@@ -113,8 +114,9 @@ try
         // }
         // else
         // {
-        dbContext.Database.Migrate();
+        //dbContext.Database.Migrate();
         // }
+        dbContext.Database.EnsureCreated();
 
         if (!dbContext.Clients.Any())
         {

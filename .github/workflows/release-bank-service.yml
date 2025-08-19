@@ -8,6 +8,7 @@ permissions:
 
 jobs:
   Versioning:
+#    if: github.event_name == 'workflow_dispatch' || github.ref == 'refs/heads/production'
     uses: ./.github/workflows/service-versioning.yml
     with:
       project_file_path: "Course2/BankManagementSystem.API/BankManagementSystem.API.csproj"
