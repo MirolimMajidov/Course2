@@ -49,3 +49,12 @@ jobs:
           tags: |
             mirolimmajidov/itrun.cbs:latest
             mirolimmajidov/itrun.cbs:${{ needs.Versioning.outputs.version }}
+
+      - name: Generate release notes
+        run: |
+          echo "## Release notes🚀" >> $GITHUB_STEP_SUMMARY
+          echo "- Image name: **mirolimmajidov/itrun.cbs"** >> $GITHUB_STEP_SUMMARY
+          echo "- New version: **${{ needs.Versioning.outputs.version }}"** >> $GITHUB_STEP_SUMMARY
+          echo "- Docker image tags: **${{ needs.Versioning.outputs.version }}**, **latest**" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+        shell: bash
