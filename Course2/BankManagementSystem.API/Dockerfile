@@ -7,15 +7,15 @@ EXPOSE 8081
 FROM mcr.microsoft.com/dotnet/sdk:9.0 AS build
 ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
-COPY ["../BankManagementSystem.API/BankManagementSystem.API.csproj", "../BankManagementSystem.API/"]
-COPY ["CleanArchitecture/BankManagementSystem.Application/BankManagementSystem.Application.csproj", "CleanArchitecture/BankManagementSystem.Application/"]
+COPY ["BankManagementSystem.API/BankManagementSystem.API.csproj", "BankManagementSystem.API/"]
 COPY ["MyServiceDefaults/MyServiceDefaults.csproj", "MyServiceDefaults/"]
+COPY ["CleanArchitecture/BankManagementSystem.Presentation/BankManagementSystem.Presentation.csproj", "CleanArchitecture/BankManagementSystem.Presentation/"]
+COPY ["CleanArchitecture/BankManagementSystem.Application/BankManagementSystem.Application.csproj", "CleanArchitecture/BankManagementSystem.Application/"]
 COPY ["CleanArchitecture/BankManagementSystem.Domain/BankManagementSystem.Domain.csproj", "CleanArchitecture/BankManagementSystem.Domain/"]
 COPY ["CleanArchitecture/BankManagementSystem.Infrastructure/BankManagementSystem.Infrastructure.csproj", "CleanArchitecture/BankManagementSystem.Infrastructure/"]
-COPY ["CleanArchitecture/BankManagementSystem.Presentation/BankManagementSystem.Presentation.csproj", "CleanArchitecture/BankManagementSystem.Presentation/"]
-RUN dotnet restore "../BankManagementSystem.API/BankManagementSystem.API.csproj"
+RUN dotnet restore "BankManagementSystem.API/BankManagementSystem.API.csproj"
 COPY . .
-WORKDIR "/src/../BankManagementSystem.API"
+WORKDIR "/src/BankManagementSystem.API"
 RUN dotnet build "BankManagementSystem.API.csproj" -c $BUILD_CONFIGURATION -o /app/build
 
 FROM build AS publish
