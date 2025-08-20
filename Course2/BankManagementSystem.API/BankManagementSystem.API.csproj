@@ -3,8 +3,8 @@
     <PropertyGroup>
         <TargetFramework>net9.0</TargetFramework>
         <ImplicitUsings>enable</ImplicitUsings>
-        <Version>1.0.9</Version>
         <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+        <Version>1.0.9</Version>
     </PropertyGroup>
 
     <ItemGroup>
