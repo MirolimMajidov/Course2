@@ -8,11 +8,11 @@ FROM mcr.microsoft.com/dotnet/sdk:9.0 AS build
 ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
 COPY ["../BankManagementSystem.API/BankManagementSystem.API.csproj", "../BankManagementSystem.API/"]
-COPY ["MyServiceDefaults/MyServiceDefaults.csproj", "MyServiceDefaults/"]
-COPY ["CleanArchitecture/BankManagementSystem.Presentation/BankManagementSystem.Presentation.csproj", "CleanArchitecture/BankManagementSystem.Presentation/"]
 COPY ["CleanArchitecture/BankManagementSystem.Application/BankManagementSystem.Application.csproj", "CleanArchitecture/BankManagementSystem.Application/"]
+COPY ["MyServiceDefaults/MyServiceDefaults.csproj", "MyServiceDefaults/"]
 COPY ["CleanArchitecture/BankManagementSystem.Domain/BankManagementSystem.Domain.csproj", "CleanArchitecture/BankManagementSystem.Domain/"]
 COPY ["CleanArchitecture/BankManagementSystem.Infrastructure/BankManagementSystem.Infrastructure.csproj", "CleanArchitecture/BankManagementSystem.Infrastructure/"]
+COPY ["CleanArchitecture/BankManagementSystem.Presentation/BankManagementSystem.Presentation.csproj", "CleanArchitecture/BankManagementSystem.Presentation/"]
 RUN dotnet restore "../BankManagementSystem.API/BankManagementSystem.API.csproj"
 COPY . .
 WORKDIR "/src/../BankManagementSystem.API"
