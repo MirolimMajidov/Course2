@@ -7,15 +7,15 @@ permissions:
   contents: write  # Grant the workflow permission to push to the repository
 
 jobs:
-  Versioning:
-#    if: github.event_name == 'workflow_dispatch' || github.ref == 'refs/heads/production'
-    uses: ./.github/workflows/service-versioning.yml
-    with:
-      project_file_path: "Course2/BankManagementSystem.API/BankManagementSystem.API.csproj"
-      should_add_version_tag: ${{ github.ref == 'refs/heads/main' }}
+#  Versioning:
+##    if: github.event_name == 'workflow_dispatch' || github.ref == 'refs/heads/production'
+#    uses: ./.github/workflows/service-versioning.yml
+#    with:
+#      project_file_path: "Course2/BankManagementSystem.API/BankManagementSystem.API.csproj"
+#      should_add_version_tag: ${{ github.ref == 'refs/heads/main' }}
    
   Release:
-    needs: Versioning
+#    needs: Versioning
     runs-on: ubuntu-latest
 
     steps:
@@ -43,9 +43,9 @@ jobs:
         env:
           DOCKER_BUILD_SUMMARY: true
         with:
-          context: .
+          context: Course2/
           file: Course2/BankManagementSystem.API/Dockerfile
           push: true
           tags: |
             mirolimmajidov/itrun.cbs:latest
-            mirolimmajidov/itrun.cbs:${{ needs.Versioning.outputs.version }}
+#            mirolimmajidov/itrun.cbs:${{ needs.Versioning.outputs.version }}
