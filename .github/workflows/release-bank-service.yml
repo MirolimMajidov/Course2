@@ -41,7 +41,7 @@ jobs:
       - name: Build, tags, and push images to DockerHub
         uses: docker/build-push-action@v6
         env:
-          DOCKER_BUILD_SUMMARY: true
+          DOCKER_BUILD_SUMMARY: false
         with:
           context: ./Course2
           file: Course2/BankManagementSystem.API/Dockerfile
