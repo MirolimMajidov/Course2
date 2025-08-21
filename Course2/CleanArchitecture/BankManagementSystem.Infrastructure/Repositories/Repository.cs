@@ -11,6 +11,16 @@ public class Repository<TEntity>(BankContext context) : IRepository<TEntity>
     {
         return context.Set<TEntity>();
     }
+    
+    public IQueryable<TEntity> GetAll(int pageSize, int pageNumber)
+    {
+        var totalCount = context.Set<TEntity>().Count();
+        var pagesCount = (int)Math.Ceiling((double)totalCount / pageSize);
+        var skipCount = pageSize * (pageNumber - 1);
+        return context.Set<TEntity>()
+            .Skip(skipCount)
+            .Take(pageSize);
+    }
 
     public TEntity GetById(Guid id)
     {
